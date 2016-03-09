@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon Servidor.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/SergioCalpe/Altournative/issues"
   },
-  "homepage": "https://github.com/SergioCalpe/Altournative#readme"
+  "homepage": "https://github.com/SergioCalpe/Altournative#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "md5": "^2.0.0",
+    "mysql": "^2.10.2",
+    "nodemon": "^1.9.1"
+  }
 }
