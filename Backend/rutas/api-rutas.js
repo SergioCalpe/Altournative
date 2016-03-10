@@ -56,7 +56,29 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
     });
 
 
-    router.post("/usuarios",function(req,res){
+    router.get("/rutas/:id", function(req, res) {
+        var token = req.headers['x-access-token'];
+        
+        validarToken(token,connection,function(resultado){
+           if(resultado) {
+                var query = "SELECT * FROM rutas WHERE id=?";
+                var table = [req.params.id];
+                query = mysql.format(query,table);
+                connection.query(query,function(err,rows){
+                    if(err) {
+                        res.json({"Error" : true, "Message" : "Error executing MySQL query",
+                            "Error: ": err});
+                    } else {
+                        res.json({"Error" : false, "Message" : "Success", "Rutas" : rows});
+                    }
+                });
+            } else {
+                res.json({"Error" : true, "Message" : "ERROR: Token invalido"});
+            }   
+        });
+    });
+
+    router.post("/rutas",function(req,res){
         var token = req.headers['x-access-token'];
 
         validarToken(token,connection,function(resultado){
@@ -71,7 +93,7 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
                 connection.query(query,function(err,rows){
                     if(err) {
                         res.json({"Error" : true, 
-                            "Message" : "ERROR: Este ruta ya existe en la BD:"+req.body.login,
+                            "Message" : "ERROR: Este ruta ya existe en la BD:"+req.body.id,
                             "Error: ": err});
                     } else {
                         res.json({"Error" : false, "Message" : "Ruta insertada correctamente."});
@@ -122,7 +144,7 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
                     if(err) {
                         res.json({"Error" : true, "Message" : "Error executing MySQL query"});
                     } else {
-                        res.json({"Error" : false, "Message" : "Eliminado de la BD rutas: "+req.params.login});
+                        res.json({"Error" : false, "Message" : "Eliminado de la BD rutas: "+req.params.id});
                     }
                 });
             }else {

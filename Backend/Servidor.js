@@ -35,6 +35,9 @@ REST.prototype.configureExpress = function(connection) {
       var self = this;
       app.use(bodyParser.urlencoded({ extended: true }));
       app.use(bodyParser.json());
+      // Permitir XMLHttpRequest  
+      var cors = require('cors');
+      app.use(cors());
       var router = express.Router();
       app.use('/altournative', router);
       var sesion = new apiSesion(router, connection, md5);

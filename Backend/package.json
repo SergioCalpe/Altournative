@@ -19,6 +19,7 @@
   "homepage": "https://github.com/SergioCalpe/Altournative#readme",
   "dependencies": {
     "body-parser": "^1.15.0",
+    "cors": "^2.7.1",
     "express": "^4.13.4",
     "jwt-simple": "^0.4.1",
     "md5": "^2.0.0",
