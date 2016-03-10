@@ -31,8 +31,10 @@ angular.module('altournative', [
 	if(store.get('jwt')) {
 		$scope.userLoged.login = jwtHelper.decodeToken(store.get('jwt'));
 		$('#userLoged').show();
+		$('#buttonAdmin').show();
 	} else {
 		$('#userLoged').hide();
+		$('#buttonAdmin').hide();
 	}
 
 	$scope.signup = function() {
@@ -47,5 +49,7 @@ angular.module('altournative', [
 		store.remove('jwt');
 		$state.go('home');
 		$('#userLoged').hide();
+		$('#buttonAdmin').hide();
+
 	}
 });

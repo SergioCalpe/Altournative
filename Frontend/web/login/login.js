@@ -28,9 +28,16 @@ angular.module('altournative.login', [
       		if(store.get('jwt')) {
 				$scope.userLoged.login.login = $scope.user.login;
 				$('#userLoged').show();
+				$('#buttonAdmin').show();
+				
+
+
 			} else {
 				$('#userLoged').hide();
+				$('#buttonAdmin').hide();
+
 			}
+
 		}, function(error) {
 			alert(error.data);
 		});

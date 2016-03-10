@@ -17,7 +17,7 @@ angular.module('altournative.signup', [
 			method: 'POST',
 			data: $scope.user
 		}).then(function (res) {
-			store.set('jwt', res.data.idToken);
+			store.set('jwt', res.data.token);
 			$state.go('home');
 			if(store.get('jwt')) {
 				$scope.userLoged.msg = 'Bienvenido'
