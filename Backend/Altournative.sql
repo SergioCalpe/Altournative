@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 08-03-2016 a las 20:00:43
+-- Tiempo de generación: 10-03-2016 a las 10:58:01
 -- Versión del servidor: 10.1.9-MariaDB
 -- Versión de PHP: 5.5.30
 
@@ -80,13 +80,27 @@ CREATE TABLE `ruta` (
 
 CREATE TABLE `usuario` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(100) COLLATE utf8_bin NOT NULL,
-  `apellidos` varchar(200) COLLATE utf8_bin NOT NULL,
-  `dni` varchar(20) COLLATE utf8_bin NOT NULL,
-  `email` varchar(100) COLLATE utf8_bin NOT NULL,
-  `tlf` varchar(20) COLLATE utf8_bin NOT NULL,
-  `login` varchar(100) COLLATE utf8_bin NOT NULL
+  `nombre` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `apellidos` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  `dni` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  `email` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `telefono` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  `login` varchar(100) COLLATE utf8_bin NOT NULL,
+  `password` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `nombre`, `apellidos`, `dni`, `email`, `telefono`, `login`, `password`) VALUES
+(6, 'pepe', 'jimenez femenia', 'XXXXXXXXX', 'pepe@email.com', '666666666', 'pepepe', '81dc9bdb52d04dc20036dbd8313ed055'),
+(7, 'sergio', 'jimenez femenia', 'XXXXXXXXX', 'sergio@email.com', '666666666', 'sergio', '81dc9bdb52d04dc20036dbd8313ed055'),
+(9, 'sergio', 'jimenez femenia', 'XXXXXXXXX', 'pablo@email.com', '666666666', 'pablo', '81dc9bdb52d04dc20036dbd8313ed055'),
+(11, 'sergio', 'jimenez femenia', 'XXXXXXXXX', 'perico@email.com', '666666666', 'perico', '81dc9bdb52d04dc20036dbd8313ed055'),
+(12, 'sergio', 'jimenez femenia', 'XXXXXXXXX', 'hola@email.com', '666666666', 'hola', '81dc9bdb52d04dc20036dbd8313ed055'),
+(13, 'sergio', 'jimenez femenia', 'XXXXXXXXX', 'manuel@email.com', '666666666', 'manuel', '81dc9bdb52d04dc20036dbd8313ed055'),
+(15, 'sergio', 'jimenez femenia', 'XXXXXXXXX', 'manuel2@email.com', '666666666', 'manuel2', '81dc9bdb52d04dc20036dbd8313ed055');
 
 -- --------------------------------------------------------
 
@@ -168,7 +182,7 @@ ALTER TABLE `ruta`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT de la tabla `valoracion`
 --

@@ -13,6 +13,8 @@ function crearToken(login, id) {
   return jwt.encode(payload, secreto);
 }
 
+
+
 function REST_ROUTER(router,connection,md5) {
     var self = this;
     self.handleRoutes(router,connection,md5);
@@ -40,6 +42,26 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
             		res.json({"Error" : true, "Message" : "ERROR: Contraseña invalida."});
             	}
                 
+            }
+        });
+    });
+
+    router.post("/signup", function(req, res) {
+        var query = "INSERT INTO usuario(nombre, apellidos, dni, telefono, email, login, password) VALUES (?,?,?,?,?,?,?)";
+        var table = [req.body.nombre,
+                     req.body.apellidos,
+                     req.body.dni,
+                     req.body.telefono,
+                     req.body.email,
+                     req.body.login,
+                     md5(req.body.password)];
+        query = mysql.format(query,table);
+        connection.query(query,function(err,row){
+            if(err) {
+                res.json({"Error" : true, "Message" : "Error executing MySQL query",
+                    "Error: ": err});
+            } else {
+                res.json({"Error" : true, "Message" : "Success", "token":crearToken(req.body.login, row.insertId)});                
             }
         });
     });

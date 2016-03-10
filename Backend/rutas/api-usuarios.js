@@ -1,4 +1,31 @@
 var mysql   = require("mysql");
+var jwt     = require("jwt-simple");
+
+// Ruta para Autenticacion
+var secreto = 'altournativesecret';
+
+// Funcion para validar token
+var validarToken = function(token, connection, next) {
+    var decoded = jwt.decode(token, secreto);
+    var query = "SELECT id, login, password FROM usuario WHERE login=?";
+    var table = [decoded.login];
+    query = mysql.format(query,table);
+    connection.query(query,function(err,row){
+        if(err) {
+            return next(err);
+        } else {
+            var resultado = row;
+            if(resultado.length > 0) {
+                console.log("JODER: "+resultado[0].login +" / "+decoded.login)
+                console.log(resultado[0].login == decoded.login);
+                return next(resultado[0].login == decoded.login);
+                
+            } else {
+                return next(false);
+            }
+        }
+    });
+}
 
 function REST_ROUTER(router,connection,md5) {
     var self = this;
@@ -7,19 +34,27 @@ function REST_ROUTER(router,connection,md5) {
 
 REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
     var self = this;
+    
 
     router.get("/usuarios", function(req, res) {
-    	var query = "SELECT * FROM ??";
-        var table = ["usuario"];
-        query = mysql.format(query,table);
-        connection.query(query,function(err,rows){
-            if(err) {
-                res.json({"Error" : true, "Message" : "Error executing MySQL query",
-                	"Error: ": err});
+        var token = req.headers['x-access-token'];
+        
+        validarToken(token,connection,function(resultado){
+           if(resultado) {
+            var query = "SELECT * FROM ??";
+            var table = ["usuario"];
+            query = mysql.format(query,table);
+            connection.query(query,function(err,rows){
+                if(err) {
+                    res.json({"Error" : true, "Message" : "Error executing MySQL query",
+                        "Error: ": err});
+                } else {
+                    res.json({"Error" : false, "Message" : "Success", "Usuarios" : rows});
+                }
+            });
             } else {
-                res.json({"Error" : false, "Message" : "Success", "Usuarios" : rows});
-            }
-            connection.release();
+                res.json({"Error" : true, "Message" : "ERROR: Token invalido"});
+            }  
         });
     });
 
@@ -36,7 +71,7 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
         connection.query(query,function(err,rows){
             if(err) {
                 res.json({"Error" : true, 
-                	"Message" : "Error executing MySQL query",
+                	"Message" : "ERROR: Este login ya existe en la BD:"+req.body.login,
                 	"Error: ": err});
             } else {
                 res.json({"Error" : false, "Message" : "Usuario insertado correctamente."});
@@ -45,7 +80,6 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
     });
 
      router.put("/usuarios",function(req,res){
-        var query = "INSERT INTO usuario(nombre, apellidos, dni, telefono, email, login, password) VALUES (?,?,?,?,?,?,?)";
         var query = "UPDATE usuario SET nombre=?, apellidos=?, dni=?, telefono=?, email=?, login=?, password=? WHERE id = ?";
         var table = [req.body.nombre,
                      req.body.apellidos,

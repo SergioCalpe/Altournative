@@ -37,8 +37,9 @@ REST.prototype.configureExpress = function(connection) {
       app.use(bodyParser.json());
       var router = express.Router();
       app.use('/altournative', router);
+      var sesion = new apiSesion(router, connection, md5);
       var rest_router = new apiUsuarios(router,connection,md5);
-      var rest_sesion = new apiSesion(router, connection, md5);
+
       self.startServer();
 }
 
