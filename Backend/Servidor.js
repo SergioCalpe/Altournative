@@ -4,6 +4,7 @@ var bodyParser  = require("body-parser");
 var md5 = require('MD5');
 var apiUsuarios = require("./rutas/api-usuarios.js");
 var apiSesion = require("./rutas/api-sesion.js");
+var apiPais = require("./rutas/api-pais.js");
 var app  = express();
 
 function REST(){
@@ -42,6 +43,7 @@ REST.prototype.configureExpress = function(connection) {
       app.use('/altournative', router);
       var sesion = new apiSesion(router, connection, md5);
       var rest_router = new apiUsuarios(router,connection,md5);
+      var paises = new apiPais(router,connection,md5);
 
       self.startServer();
 }
