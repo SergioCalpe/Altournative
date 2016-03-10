@@ -2,7 +2,8 @@ var express = require("express");
 var mysql   = require("mysql");
 var bodyParser  = require("body-parser");
 var md5 = require('MD5');
-var rest = require("./api-rest.js");
+var apiUsuarios = require("./rutas/api-usuarios.js");
+var apiSesion = require("./rutas/api-sesion.js");
 var app  = express();
 
 function REST(){
@@ -36,7 +37,8 @@ REST.prototype.configureExpress = function(connection) {
       app.use(bodyParser.json());
       var router = express.Router();
       app.use('/altournative', router);
-      var rest_router = new rest(router,connection,md5);
+      var rest_router = new apiUsuarios(router,connection,md5);
+      var rest_sesion = new apiSesion(router, connection, md5);
       self.startServer();
 }
 

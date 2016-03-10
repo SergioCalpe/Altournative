@@ -7,9 +7,6 @@ function REST_ROUTER(router,connection,md5) {
 
 REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
     var self = this;
-    router.get("/",function(req,res){
-        res.json({"Message" : "Hello World !"});
-    });
 
     router.get("/usuarios", function(req, res) {
     	var query = "SELECT * FROM ??";
@@ -41,6 +38,29 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
                 res.json({"Error" : true, 
                 	"Message" : "Error executing MySQL query",
                 	"Error: ": err});
+            } else {
+                res.json({"Error" : false, "Message" : "Usuario insertado correctamente."});
+            }
+        });
+    });
+
+     router.put("/usuarios",function(req,res){
+        var query = "INSERT INTO usuario(nombre, apellidos, dni, telefono, email, login, password) VALUES (?,?,?,?,?,?,?)";
+        var query = "UPDATE usuario SET nombre=?, apellidos=?, dni=?, telefono=?, email=?, login=?, password=? WHERE id = ?";
+        var table = [req.body.nombre,
+                     req.body.apellidos,
+                     req.body.dni,
+                     req.body.telefono,
+                     req.body.email,
+                     req.body.login,
+                     md5(req.body.password),
+                     req.body.id];
+        query = mysql.format(query,table);
+        connection.query(query,function(err,rows){
+            if(err) {
+                res.json({"Error" : true, 
+                    "Message" : "Error executing MySQL query",
+                    "Error: ": err});
             } else {
                 res.json({"Error" : false, "Message" : "Usuario insertado correctamente."});
             }
