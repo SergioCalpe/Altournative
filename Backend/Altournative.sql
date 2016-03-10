@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Servidor: localhost
--- Tiempo de generación: 10-03-2016 a las 10:58:01
--- Versión del servidor: 10.1.9-MariaDB
--- Versión de PHP: 5.5.30
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 10-03-2016 a las 16:25:32
+-- Versión del servidor: 10.1.10-MariaDB
+-- Versión de PHP: 7.0.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `Altournative`
+-- Base de datos: `altournative`
 --
 
 -- --------------------------------------------------------
@@ -27,6 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `ciudad` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(100) COLLATE utf8_bin NOT NULL,
   `pais` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -34,10 +35,10 @@ CREATE TABLE `ciudad` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `guia`
+-- Estructura de tabla para la tabla `guias`
 --
 
-CREATE TABLE `guia` (
+CREATE TABLE `guias` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) COLLATE utf8_bin NOT NULL,
   `apellidos` varchar(200) COLLATE utf8_bin NOT NULL,
@@ -55,21 +56,23 @@ CREATE TABLE `guia` (
 --
 
 CREATE TABLE `pais` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ruta`
+-- Estructura de tabla para la tabla `rutas`
 --
 
-CREATE TABLE `ruta` (
+CREATE TABLE `rutas` (
   `id` int(11) NOT NULL,
-  `nombre` int(11) NOT NULL,
+  `nombre` varchar(100) COLLATE utf8_bin NOT NULL,
   `distancia` int(11) NOT NULL,
   `duracion` int(11) NOT NULL,
-  `ciudad` varchar(100) COLLATE utf8_bin NOT NULL
+  `ciudad` varchar(100) COLLATE utf8_bin NOT NULL,
+  `guia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -125,13 +128,14 @@ CREATE TABLE `valoracion` (
 -- Indices de la tabla `ciudad`
 --
 ALTER TABLE `ciudad`
-  ADD PRIMARY KEY (`nombre`),
-  ADD UNIQUE KEY `pais` (`pais`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `pais` (`pais`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
--- Indices de la tabla `guia`
+-- Indices de la tabla `guias`
 --
-ALTER TABLE `guia`
+ALTER TABLE `guias`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `ciudad` (`ciudad`);
 
@@ -139,14 +143,17 @@ ALTER TABLE `guia`
 -- Indices de la tabla `pais`
 --
 ALTER TABLE `pais`
-  ADD PRIMARY KEY (`nombre`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
--- Indices de la tabla `ruta`
+-- Indices de la tabla `rutas`
 --
-ALTER TABLE `ruta`
+ALTER TABLE `rutas`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `ciudad` (`ciudad`);
+  ADD UNIQUE KEY `ciudad` (`ciudad`),
+  ADD UNIQUE KEY `guia` (`guia`);
 
 --
 -- Indices de la tabla `usuario`
@@ -169,14 +176,24 @@ ALTER TABLE `valoracion`
 --
 
 --
--- AUTO_INCREMENT de la tabla `guia`
+-- AUTO_INCREMENT de la tabla `ciudad`
 --
-ALTER TABLE `guia`
+ALTER TABLE `ciudad`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de la tabla `ruta`
+-- AUTO_INCREMENT de la tabla `guias`
 --
-ALTER TABLE `ruta`
+ALTER TABLE `guias`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `pais`
+--
+ALTER TABLE `pais`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `rutas`
+--
+ALTER TABLE `rutas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
@@ -199,22 +216,23 @@ ALTER TABLE `ciudad`
   ADD CONSTRAINT `ciudad-pais` FOREIGN KEY (`pais`) REFERENCES `pais` (`nombre`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `guia`
+-- Filtros para la tabla `guias`
 --
-ALTER TABLE `guia`
+ALTER TABLE `guias`
   ADD CONSTRAINT `guia-ciudad` FOREIGN KEY (`ciudad`) REFERENCES `ciudad` (`nombre`);
 
 --
--- Filtros para la tabla `ruta`
+-- Filtros para la tabla `rutas`
 --
-ALTER TABLE `ruta`
-  ADD CONSTRAINT `ruta-ciudad` FOREIGN KEY (`ciudad`) REFERENCES `ciudad` (`nombre`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `rutas`
+  ADD CONSTRAINT `ruta-ciudad` FOREIGN KEY (`ciudad`) REFERENCES `ciudad` (`nombre`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `ruta-guia` FOREIGN KEY (`guia`) REFERENCES `guias` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `valoracion`
 --
 ALTER TABLE `valoracion`
-  ADD CONSTRAINT `valoracion-ruta` FOREIGN KEY (`ruta`) REFERENCES `ruta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `valoracion-ruta` FOREIGN KEY (`ruta`) REFERENCES `rutas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `valoracion-usuario` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
