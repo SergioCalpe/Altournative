@@ -1,0 +1,26 @@
+<div class="login-page jumbotron center-block">
+  <h1>Login</h1>
+  <form ng-controller="LoginCtrl" name="login" role="form" novalidate>
+	  <div class="form-group">
+	  	<label for="username">Username</label>
+	   	<input type="text" class="form-control" ng-model="user.login" name="username" id="login" placeholder="Username" required>
+	   	<span class="log-fail" ng-show="login.username.$dirty && login.username.$invalid">
+	    	<span ng-show="login.username.$error.required">Username is required</span>
+	   	</span>
+	  </div>
+	  <div class="form-group">
+	  	<label for="password">Password</label>
+	    <input type="password" class="form-control" name="password" id="password" ng-model="user.password" placeholder="Password" required>
+	  	<span class="log-fail" ng-show="login.password.$dirty && login.password.$invalid">
+	    	<span ng-show="login.password.$error.required">Password is required</span>
+	   	</span>
+	  </div>
+
+	  <button type="submit" class="btn btn-primary" ng-disabled="login.username.$invalid || login.password.$invalid" ng-click="userLogin()">Submit</button>
+	  <a ui-sref="home()">Home</a>
+	  <br>
+	  <br>
+	  <label>¿No estás registrado en Gamesbook?</label>
+	  <a ui-sref="signup()">Crea ahora tu cuenta de usuario</a>
+	</form>
+</div>

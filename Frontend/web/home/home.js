@@ -1,4 +1,3 @@
-alert('Cargamos página de home');
 
 angular.module('altournative.home', [
 	'ui.router',

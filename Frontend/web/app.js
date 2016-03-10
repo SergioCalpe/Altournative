@@ -2,8 +2,6 @@ angular.module('altournative', [
 	'altournative.home',
 	'altournative.signup',
 	'altournative.login',
-	'altournative.usuarios',
-	'altournative.videojuegos',
 	'angular-jwt',
 	'angular-storage',
 	'ui.bootstrap',
