@@ -2,6 +2,7 @@ angular.module('altournative', [
 	'altournative.home',
 	'altournative.signup',
 	'altournative.login',
+	'altournative.usuarios',
 	'angular-jwt',
 	'angular-storage',
 	'ui.bootstrap',
@@ -52,4 +53,9 @@ angular.module('altournative', [
 		$('#buttonAdmin').hide();
 
 	}
+
+	$scope.usuarios = function(){
+		$location.path('/usuarios');
+	}
+	
 });

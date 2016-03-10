@@ -1,0 +1,86 @@
+<div ng-controller="UsuariosCtrl" class="signup center-block jumbotron">
+	<legend><h1>Usuarios</h1></legend>
+	<form role="form" class="form-inline"> 
+		<div class="searchBar form-group has-feedback has-feedback-left">
+		    <label class="control-label sr-only">Username</label>
+			    <div class="inline-feedback">
+				    <input id="search" type="text" class="form-control input-lg" ng-model="search" placeholder="Search" />
+				    <i class="form-control-feedback glyphicon glyphicon-search"></i>
+			    </div>
+          <select ng-model="list">
+            <option value="">Nombre</option>
+            <option value="usuario">Apellidos</option>
+          </select>
+	  	</div>
+  	</form> 
+    <br>
+    <br><br>
+	
+	<!--  Repeat start, beggining of category group -->
+    <div ng-repeat-start="usuario in data  | filter: miFiltro | orderBy:list" class="animate-repeat-categoria">
+      <button class="btn btn-primary btn-block btn-lg" ng-click="toggleCategory(usuario)">
+        {{ usuario.items.login }}
+        <span class="expand-indicator" ng-show="usuario.expanded"><i class="fa fa-chevron-circle-down fa-2x"></i></span>
+        <span class="expand-indicator" ng-show="!usuario.expanded"><i class="fa fa-chevron-circle-right fa-2x"></i></span>
+      </button>
+
+    </div>
+    
+    <!-- Anyadido por Héctor-->
+    <div ng-repeat="usuario in array">
+      <td >Id: </td> <td>{{usuario.id}}</td> <br>
+      <td>Nombre: {{usuario.nombre}}</td> <br>
+      <td>Apellidos: {{usuario.apellidos}}</td> <br>
+      <td>Email: {{usuario.email}}</td> <br>
+      <td>Teléfono: {{usuario.telefono}}</td> <br> <br>
+    </div>
+
+    <!--  Lo que hay entre las barrras-->
+    
+      <div class="content list-items animate-show-item" ng-show="usuario.expanded">
+        <div class="left">
+          <legend><h3>Datos del usuario</h3></legend>
+          <ul>
+          	<li class="animate-repeat-item"><label>Usuario: </label> {{usuarios.items.login}}</li>
+            <li class="animate-repeat-item"><label>Nombre:</label> {{usuario.items.nombre}}</li>
+            <li class="animate-repeat-item"><label>Apellidos:</label> {{usuario.items.apellidos}}</li>
+            <li class="animate-repeat-item"><label>Email: </label> {{usuario.items.email}}</li>
+          </ul>
+
+          <div ng-controller="UserEditCtrl" id="div_add" class="div_add list-items animate-show-item" ng-show="editar">
+            <form role="form" >
+                <legend><h3>Editar juego</h3></legend>
+                <div class="form-group">
+                  <input type="text" class="form-control" ng-model="usuario.items.login" disabled="disabled">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" ng-model="usuario.items.nombre" placeholder="Nombre">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control"ng-model="usuario.items.apellidos" placeholder="Apellidos">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control"ng-model="usuario.items.email" placeholder="Email">
+                </div>
+                
+                <button type="submit"  class="btn btn-primary" ng-click="editar=false; guardar()">Guardar</button>
+              </form>
+          </div>
+        </div>
+        <div class="rigth">
+          <img src="{{usuario.items.imagen}}" width="50%" height="50%"><br><br>
+          <button id="botonEditar" ng-model="id_usuario" class="btn btn-warning"  ng-click="editar ? editar=false : editar=true">Editar</button>
+        </div> 
+         
+      </div>
+    
+      
+    <!--  Repeat end, closing category group -->
+    <div ng-repeat-end>
+      <button ng-show="usuario.expanded" class="btn btn-primary btn-block btn-sm animate-show-item" disabled="disabled">/ {{ usuario.items.login }}</button>
+      <hr>
+    </div>
+
+
+
+</div>
