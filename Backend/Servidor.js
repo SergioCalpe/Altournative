@@ -5,6 +5,10 @@ var md5 = require('MD5');
 var apiUsuarios = require("./rutas/api-usuarios.js");
 var apiSesion = require("./rutas/api-sesion.js");
 var apiPais = require("./rutas/api-pais.js");
+var apiCiudad = require("./rutas/api-ciudad.js");
+var apiValoracion = require("./rutas/api-valoracion.js");
+var apiRutas = require("./rutas/api-rutas.js");
+var apiGuias = require("./rutas/api-guias.js");
 var app  = express();
 
 function REST(){
@@ -44,6 +48,10 @@ REST.prototype.configureExpress = function(connection) {
       var sesion = new apiSesion(router, connection, md5);
       var rest_router = new apiUsuarios(router,connection,md5);
       var paises = new apiPais(router,connection,md5);
+      var ciudades = new apiCiudad(router,connection,md5);
+      var rutas = new apiRutas(router,connection,md5);
+      var guias = new apiGuias(router,connection,md5);
+      //var valoracion = new apiValoracion(router,connection,md5);
 
       self.startServer();
 }

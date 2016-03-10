@@ -78,11 +78,12 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
         });
     });
 
-    router.post("/valoracion",function(req,res){
+  
+    router.post("/valoracion",function(req,res){
         var token = req.headers['x-access-token'];
-
+        
         validarToken(token,connection,function(resultado){
-            if(resultado) {
+           if(resultado) {
                 var query = "INSERT INTO valoracion(mensaje, fecha, puntuacion, usuario, ruta) VALUES (?,?,?,?,?)";
                 var table = [req.body.mensaje,
                              req.body.fecha,
@@ -93,16 +94,18 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
                 connection.query(query,function(err,rows){
                     if(err) {
                         res.json({"Error" : true, 
-                            "Message" : "ERROR: Este guia ya existe en la BD:"+req.body.id,
+                            "Message" : "ERROR: Fallo de insertado.",
                             "Error: ": err});
                     } else {
-                        res.json({"Error" : false, "Message" : "Valoracion insertado correctamente."});
+                        res.json({"Error" : false, "Message" : "Valoracion insertada correctamente."});
                     }
                 });
-            } else {
-                 res.json({"Error" : true, "Message" : "ERROR: Token invalido"});
+            }else {
+                res.json({"Error" : true, "Message" : "ERROR: Token invalido"});
             }
+
         });
+
     });
 
     router.put("/valoracion",function(req,res){
@@ -156,3 +159,4 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
 
 
 }
+module.exports = REST_ROUTER;

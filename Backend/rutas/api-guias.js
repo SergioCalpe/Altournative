@@ -119,7 +119,7 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
                              req.body.email,
                              req.body.telefono,
                              req.body.fecha_nac,
-                             req.body.ciudad
+                             req.body.ciudad,
                              req.body.id];
                 query = mysql.format(query,table);
                 connection.query(query,function(err,rows){
@@ -159,3 +159,4 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
     });
 
 }
+module.exports = REST_ROUTER;
