@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.5.2
 -- http://www.phpmyadmin.net
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 10-03-2016 a las 16:25:32
+-- Servidor: localhost
+-- Tiempo de generación: 15-03-2016 a las 17:14:11
 -- Versión del servidor: 10.1.10-MariaDB
--- Versión de PHP: 7.0.4
+-- Versión de PHP: 5.6.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `altournative`
+-- Base de datos: `Altournative`
 --
 
 -- --------------------------------------------------------
@@ -27,18 +27,27 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `ciudad` (
-  `id` int(11) NOT NULL,
   `nombre` varchar(100) COLLATE utf8_bin NOT NULL,
   `pais` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Volcado de datos para la tabla `ciudad`
+--
+
+INSERT INTO `ciudad` (`nombre`, `pais`) VALUES
+('Alcoy', 'España'),
+('Alicante', 'España'),
+('Elche', 'España'),
+('Novelda', 'España');
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `guias`
+-- Estructura de tabla para la tabla `guia`
 --
 
-CREATE TABLE `guias` (
+CREATE TABLE `guia` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) COLLATE utf8_bin NOT NULL,
   `apellidos` varchar(200) COLLATE utf8_bin NOT NULL,
@@ -46,8 +55,16 @@ CREATE TABLE `guias` (
   `email` varchar(100) COLLATE utf8_bin NOT NULL,
   `telefono` varchar(20) COLLATE utf8_bin NOT NULL,
   `fecha_nac` date NOT NULL,
-  `ciudad` varchar(100) COLLATE utf8_bin NOT NULL
+  `ciudad` varchar(100) COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Volcado de datos para la tabla `guia`
+--
+
+INSERT INTO `guia` (`id`, `nombre`, `apellidos`, `dni`, `email`, `telefono`, `fecha_nac`, `ciudad`) VALUES
+(5, 'Danilo', 'Reis', 'danilo@ua.es', '6123456', '1999-03-06', '0000-00-00', 'Alcoy'),
+(6, 'Fernando', 'Llopis', 'fer@ua.es', '6123456', '1999-03-06', '0000-00-00', 'Alcoy');
 
 -- --------------------------------------------------------
 
@@ -56,23 +73,30 @@ CREATE TABLE `guias` (
 --
 
 CREATE TABLE `pais` (
-  `id` int(11) NOT NULL,
   `nombre` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Volcado de datos para la tabla `pais`
+--
+
+INSERT INTO `pais` (`nombre`) VALUES
+('Brasil'),
+('España'),
+('Francia');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `rutas`
+-- Estructura de tabla para la tabla `ruta`
 --
 
-CREATE TABLE `rutas` (
+CREATE TABLE `ruta` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(100) COLLATE utf8_bin NOT NULL,
+  `nombre` int(11) NOT NULL,
   `distancia` int(11) NOT NULL,
   `duracion` int(11) NOT NULL,
-  `ciudad` varchar(100) COLLATE utf8_bin NOT NULL,
-  `guia` int(11) NOT NULL
+  `ciudad` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -97,13 +121,12 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `apellidos`, `dni`, `email`, `telefono`, `login`, `password`) VALUES
-(6, 'pepe', 'jimenez femenia', 'XXXXXXXXX', 'pepe@email.com', '666666666', 'pepepe', '81dc9bdb52d04dc20036dbd8313ed055'),
-(7, 'sergio', 'jimenez femenia', 'XXXXXXXXX', 'sergio@email.com', '666666666', 'sergio', '81dc9bdb52d04dc20036dbd8313ed055'),
+(6, 'pepe2', 'jimenez femenia', 'XXXXXXXXX', 'pepe@email.com', '666666666', 'pepepe', '81dc9bdb52d04dc20036dbd8313ed055'),
 (9, 'sergio', 'jimenez femenia', 'XXXXXXXXX', 'pablo@email.com', '666666666', 'pablo', '81dc9bdb52d04dc20036dbd8313ed055'),
 (11, 'sergio', 'jimenez femenia', 'XXXXXXXXX', 'perico@email.com', '666666666', 'perico', '81dc9bdb52d04dc20036dbd8313ed055'),
 (12, 'sergio', 'jimenez femenia', 'XXXXXXXXX', 'hola@email.com', '666666666', 'hola', '81dc9bdb52d04dc20036dbd8313ed055'),
 (13, 'sergio', 'jimenez femenia', 'XXXXXXXXX', 'manuel@email.com', '666666666', 'manuel', '81dc9bdb52d04dc20036dbd8313ed055'),
-(15, 'sergio', 'jimenez femenia', 'XXXXXXXXX', 'manuel2@email.com', '666666666', 'manuel2', '81dc9bdb52d04dc20036dbd8313ed055');
+(17, 'No borrar', 'pues eso.', NULL, NULL, NULL, 'sergio', '81dc9bdb52d04dc20036dbd8313ed055');
 
 -- --------------------------------------------------------
 
@@ -128,32 +151,26 @@ CREATE TABLE `valoracion` (
 -- Indices de la tabla `ciudad`
 --
 ALTER TABLE `ciudad`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `pais` (`pais`),
-  ADD UNIQUE KEY `nombre` (`nombre`);
+  ADD PRIMARY KEY (`nombre`);
 
 --
--- Indices de la tabla `guias`
+-- Indices de la tabla `guia`
 --
-ALTER TABLE `guias`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `ciudad` (`ciudad`);
+ALTER TABLE `guia`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `pais`
 --
 ALTER TABLE `pais`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`),
-  ADD UNIQUE KEY `nombre` (`nombre`);
+  ADD PRIMARY KEY (`nombre`);
 
 --
--- Indices de la tabla `rutas`
+-- Indices de la tabla `ruta`
 --
-ALTER TABLE `rutas`
+ALTER TABLE `ruta`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `ciudad` (`ciudad`),
-  ADD UNIQUE KEY `guia` (`guia`);
+  ADD UNIQUE KEY `ciudad` (`ciudad`);
 
 --
 -- Indices de la tabla `usuario`
@@ -176,30 +193,20 @@ ALTER TABLE `valoracion`
 --
 
 --
--- AUTO_INCREMENT de la tabla `ciudad`
+-- AUTO_INCREMENT de la tabla `guia`
 --
-ALTER TABLE `ciudad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `guia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT de la tabla `guias`
+-- AUTO_INCREMENT de la tabla `ruta`
 --
-ALTER TABLE `guias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `pais`
---
-ALTER TABLE `pais`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `rutas`
---
-ALTER TABLE `rutas`
+ALTER TABLE `ruta`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT de la tabla `valoracion`
 --
@@ -210,29 +217,16 @@ ALTER TABLE `valoracion`
 --
 
 --
--- Filtros para la tabla `ciudad`
+-- Filtros para la tabla `ruta`
 --
-ALTER TABLE `ciudad`
-  ADD CONSTRAINT `ciudad-pais` FOREIGN KEY (`pais`) REFERENCES `pais` (`nombre`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `guias`
---
-ALTER TABLE `guias`
-  ADD CONSTRAINT `guia-ciudad` FOREIGN KEY (`ciudad`) REFERENCES `ciudad` (`nombre`);
-
---
--- Filtros para la tabla `rutas`
---
-ALTER TABLE `rutas`
-  ADD CONSTRAINT `ruta-ciudad` FOREIGN KEY (`ciudad`) REFERENCES `ciudad` (`nombre`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `ruta-guia` FOREIGN KEY (`guia`) REFERENCES `guias` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `ruta`
+  ADD CONSTRAINT `ruta-ciudad` FOREIGN KEY (`ciudad`) REFERENCES `ciudad` (`nombre`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `valoracion`
 --
 ALTER TABLE `valoracion`
-  ADD CONSTRAINT `valoracion-ruta` FOREIGN KEY (`ruta`) REFERENCES `rutas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `valoracion-ruta` FOREIGN KEY (`ruta`) REFERENCES `ruta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `valoracion-usuario` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
