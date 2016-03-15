@@ -39,7 +39,7 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
         validarToken(token,connection,function(resultado){
            if(resultado) {
                 var query = "SELECT * FROM ??";
-                var table = ["guias"];
+                var table = ["guia"];
                 query = mysql.format(query,table);
                 connection.query(query,function(err,rows){
                     if(err) {
@@ -60,7 +60,7 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
         
         validarToken(token,connection,function(resultado){
            if(resultado) {
-                var query = "SELECT * FROM guias WHERE id=?";
+                var query = "SELECT * FROM guia WHERE id=?";
                 var table = [req.params.id];
                 query = mysql.format(query,table);
                 connection.query(query,function(err,rows){
@@ -82,7 +82,7 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
 
         validarToken(token,connection,function(resultado){
             if(resultado) {
-                var query = "INSERT INTO guias(nombre, apellidos, dni, email, telefono, fecha_nac, ciudad) VALUES (?,?,?,?,?,?,?)";
+                var query = "INSERT INTO guia(nombre, apellidos, dni, email, telefono, fecha_nac, ciudad) VALUES (?,?,?,?,?,?,?)";
                 var table = [req.body.nombre,
                              req.body.apellidos,
                              req.body.dni,
@@ -112,7 +112,7 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
         
         validarToken(token,connection,function(resultado){
            if(resultado) {
-                var query = "UPDATE rutas SET nombre=?, apellidos=?, dni=?, email=?, telefono=?, fecha_nac=?, ciudad=? WHERE id =?";
+                var query = "UPDATE guia SET nombre=?, apellidos=?, dni=?, email=?, telefono=?, fecha_nac=?, ciudad=? WHERE id =?";
                 var table = [req.body.nombre,
                              req.body.apellidos,
                              req.body.dni,
@@ -143,7 +143,7 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
         validarToken(token,connection,function(resultado){
            if(resultado) {
                 var query = "DELETE from ?? WHERE ??=?";
-                var table = ["guias","id",req.params.id];
+                var table = ["guia","id",req.params.id];
                 query = mysql.format(query,table);
                 connection.query(query,function(err,rows){
                     if(err) {

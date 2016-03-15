@@ -19,7 +19,7 @@
 	<!--  Repeat start, beggining of category group -->
     <div ng-repeat-start="usuario in array | filter:miFiltro | orderBy:list" class="animate-repeat-categoria">
       <button class="btn btn-primary btn-block btn-lg" ng-click="toggleCategory(usuario)">
-        {{usuario.nombre}}
+        {{usuario.login}}
         <span class="expand-indicator" ng-show="usuario.expanded"><i class="fa fa-chevron-circle-down fa-2x"></i></span>
         <span class="expand-indicator" ng-show="!usuario.expanded"><i class="fa fa-chevron-circle-right fa-2x"></i></span>
       </button>
@@ -38,14 +38,14 @@
     <!--  Lo que hay entre las barrras-->
     
       <div class="content list-items animate-show-item" ng-show="usuario.expanded">
-        <!--<div class="left">
+        <div class="left">
           <legend><h3>Datos del usuario</h3></legend>
           <ul>
-          	<li class="animate-repeat-item"><label>Usuario: </label> {{usuarios.items.login}}</li>
-            <li class="animate-repeat-item"><label>Nombre:</label> {{usuario.items.nombre}}</li>
-            <li class="animate-repeat-item"><label>Apellidos:</label> {{usuario.items.apellidos}}</li>
-            <li class="animate-repeat-item"><label>Email: </label> {{usuario.items.email}}</li>
-          </ul>-->
+          	<li class="animate-repeat-item"><label>Usuario: </label> {{usuario.login}}</li>
+            <li class="animate-repeat-item"><label>Nombre:</label> {{usuario.nombre}}</li>
+            <li class="animate-repeat-item"><label>Apellidos:</label> {{usuario.apellidos}}</li>
+            <li class="animate-repeat-item"><label>Email: </label> {{usuario.email}}</li>
+          </ul>
 
           <div ng-controller="UserEditCtrl" id="div_add" class="div_add list-items animate-show-item" ng-show="editar">
             <form role="form" >
@@ -66,7 +66,7 @@
                 <button type="submit"  class="btn btn-primary" ng-click="editar=false; guardar()">Guardar</button>
               </form>
           </div>
-        <!--</div>-->
+        </div>
         <div class="rigth">
           <img src="usuarios/images/edit-add.png" ng-model="id_usuario" class="myButton"  ng-click="editar ? editar=false : editar=true"/>
           <img src="usuarios/images/images.png"  ng-controller="UserDelCtrl" ng-model="id_usuario" class="myButton"  ng-click="borrar()"/>

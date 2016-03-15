@@ -1,19 +1,19 @@
-angular.module('altournative.usuarios', [
+angular.module('altournative.guias', [
 	'ui.router',
 	'angular-storage',
 	'angular-jwt'
 ])
 .config(function($stateProvider) {
-	$stateProvider.state('usuarios', {
-		url: '/usuarios',
-		controller: 'UsuariosCtrl',
-		templateUrl: 'usuarios/usuarios.html',
+	$stateProvider.state('guias', {
+		url: '/guias',
+		controller: 'guiasCtrl',
+		templateUrl: 'guias/guias.html',
 		data: {
 			requiresLogin:  true 
 		}
 	});
 })
-.controller('UsuariosCtrl', function UsuariosController($scope, $http, store, jwtHelper, $location) {
+.controller('guiasCtrl', function guiasController($scope, $http, store, jwtHelper, $location) {
 	$scope.signup = function() {
 		$location.path('/signup');
 	}
@@ -24,7 +24,7 @@ angular.module('altournative.usuarios', [
 
 	$http({
   		method: 'GET',
-  		url: 'http://localhost:3000/altournative/usuarios',
+  		url: 'http://localhost:3000/altournative/guias',
   		 headers: {
    			'x-access-token': store.get('jwt')
  		}
@@ -36,20 +36,20 @@ angular.module('altournative.usuarios', [
 				function(value, key) {
 					this.push({'expanded':false, 'items': value});
 				},
-				usuarios);
-		console.log(usuarios);
-		$scope.data = usuarios;
-		$scope.array = usuarios[2].items; //el vector de usuarios
+				guias);
+		console.log(guias[2].items);
+		$scope.data = guias;
+		$scope.array = guias[2].items; //el vector de guias
 
   	}, function errorCallback(response) {
   		//Error server response
   	});
 
-  	$scope.orderList = "login";
-	var usuarios = [];
+  	$scope.orderList = "id";
+	var guias = [];
 	
-	$scope.toggleCategory = function(usuario) {
-		usuario.expanded = !usuario.expanded;
+	$scope.toggleCategory = function(guia) {
+		guia.expanded = !guia.expanded;
 	};
 
 	Object.defineProperty($scope, "miFiltro", {
@@ -60,7 +60,7 @@ angular.module('altournative.usuarios', [
       }
   	});
 
-}).controller('UserEditCtrl', function UsuarioEdicionController($scope, store, $http, jwtHelper) {
+}).controller('guiaEditCtrl', function UsuarioEdicionController($scope, store, $http, jwtHelper) {
 	// $scope.id_usuario = jwtHelper.decodeToken(store.get('jwt')).id;
 	// console.log($scope.id_usuario+'/'+$scope.usuario.items.id+'-'+$scope.usuario.items.login);
 	// if(id_usuario != $scope.usuario.items.id){
@@ -72,11 +72,11 @@ angular.module('altournative.usuarios', [
 
 		$http({
   		method: 'PUT',
-  		url: 'http://localhost:3000/altournative/usuarios/',
+  		url: 'http://localhost:3000/altournative/guias/',
   		headers: {
    				'x-access-token': store.get('jwt')
  		},
- 		data: $scope.usuario
+ 		data: $scope.guia
 
 		}).then(function successCallback(response) {
 
@@ -85,7 +85,7 @@ angular.module('altournative.usuarios', [
   		});
   		
 	}
-}).controller('UserDelCtrl', function UsuarioEdicionController($scope, store, $http, jwtHelper,$state) {
+}).controller('guiaDelCtrl', function GuiaEdicionController($scope, store, $http, jwtHelper, $state) {
 	// $scope.id_usuario = jwtHelper.decodeToken(store.get('jwt')).id;
 	// console.log($scope.id_usuario+'/'+$scope.usuario.items.id+'-'+$scope.usuario.items.login);
 	// if(id_usuario != $scope.usuario.items.id){
@@ -97,14 +97,14 @@ angular.module('altournative.usuarios', [
 
 		$http({
   		method: 'DELETE',
-  		url: 'http://localhost:3000/altournative/usuarios/'+$scope.usuario.login,
+  		url: 'http://localhost:3000/altournative/guias/'+ $scope.guia.id,
   		headers: {
    				'x-access-token': store.get('jwt')
  		},
- 		data: $scope.usuario
+ 		data: $scope.guia
 
 		}).then(function successCallback(response) {
-			$state.reload();
+				$state.reload();
   		}, function errorCallback(response) {
  
   		});

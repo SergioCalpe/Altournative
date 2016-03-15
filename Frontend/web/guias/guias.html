@@ -1,0 +1,77 @@
+<div ng-controller="guiasCtrl" class="signup center-block jumbotron">
+	<legend><h1>Guias</h1></legend>
+	<form role="form" class="form-inline"> 
+		<div class="searchBar form-group has-feedback has-feedback-left">
+		    <label class="control-label sr-only">Username</label>
+			    <div class="inline-feedback">
+				    <input id="search" type="text" class="form-control input-lg" ng-model="search" placeholder="Search" />
+				    <i class="form-control-feedback glyphicon glyphicon-search"></i>
+			    </div>
+          <select ng-model="list">
+            <option value="">Nombre</option>
+            <option value="guia">Apellidos</option>
+          </select>
+	  	</div>
+  	</form> 
+    <br>
+    <br><br>
+	
+	<!--  Repeat start, beggining of category group -->
+    <div ng-repeat-start="guia in array | orderBy:list" class="animate-repeat-categoria">
+      <button class="btn btn-primary btn-block btn-lg" ng-click="toggleCategory(guia)">
+        {{guia.nombre}}
+        <span class="expand-indicator" ng-show="guia.expanded"><i class="fa fa-chevron-circle-down fa-2x"></i></span>
+        <span class="expand-indicator" ng-show="!guia.expanded"><i class="fa fa-chevron-circle-right fa-2x"></i></span>
+      </button>
+
+    </div>
+    
+    <!--  Lo que hay entre las barrras-->
+    
+      <div class="content list-items animate-show-item" ng-show="guia.expanded">
+        <div class="left">
+          <legend><h3>Datos del guia</h3></legend>
+          <ul>
+          	<li class="animate-repeat-item"><label>Usuario: </label> {{guia.id}}</li>
+            <li class="animate-repeat-item"><label>Nombre:</label> {{guia.nombre}}</li>
+            <li class="animate-repeat-item"><label>Apellidos:</label> {{guia.apellidos}}</li>
+            <li class="animate-repeat-item"><label>Email: </label> {{guia.email}}</li>
+          </ul>
+
+          <div ng-controller="guiaEditCtrl" id="div_add" class="div_add list-items animate-show-item" ng-show="editar">
+            <form role="form" >
+                <legend><h3>Editar usuario</h3></legend>
+                <div class="form-group">
+                  <input type="text" class="form-control" ng-model="guia.id" disabled="disabled">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" ng-model="guia.nombre" placeholder="Nombre">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control"ng-model="guia.apellidos" placeholder="Apellidos">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control"ng-model="guia.email" placeholder="Email">
+                </div>
+                
+                <button type="submit"  class="btn btn-primary" ng-click="editar=false; guardar()">Guardar</button>
+              </form>
+          </div>
+        </div>
+        <div class="rigth">
+          <img src="guias/images/edit-add.png" ng-model="id_guia" class="myButton"  ng-click="editar ? editar=false : editar=true"/>
+          <img src="guias/images/images.png"  ng-controller="guiaDelCtrl" ng-model="id_guia" class="myButton"  ng-click="borrar()"/>
+        </div> 
+         
+      </div>
+    
+      
+    <!--  Repeat end, closing category group -->
+    <div ng-repeat-end>
+      <!--<button ng-show="usuario.expanded" class="btn btn-primary btn-block btn-sm animate-show-item" disabled="disabled">/ {{ usuario.items.login }}</button>-->
+      <br/>
+    </div>
+
+
+
+</div>
