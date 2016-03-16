@@ -1,4 +1,3 @@
-
 angular.module('altournative.home', [
 	'ui.router',
 	'angular-storage',
