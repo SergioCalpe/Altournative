@@ -56,13 +56,13 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
         });
     });
 
-    router.get("/pais/:id", function(req, res) {
+    router.get("/pais/:nombre", function(req, res) {
         var token = req.headers['x-access-token'];
         
         validarToken(token,connection,function(resultado){
            if(resultado) {
-                var query = "SELECT * FROM pais WHERE id=?";
-                var table = [req.params.id];
+                var query = "SELECT * FROM pais WHERE nombre=?";
+                var table = [req.params.nombre];
                 query = mysql.format(query,table);
                 connection.query(query,function(err,rows){
                     if(err) {
@@ -92,7 +92,7 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
                             "Message" : "ERROR: Este guia ya existe en la BD:"+req.body.nombre,
                             "Error: ": err});
                     } else {
-                        res.json({"Error" : false, "Message" : "pais insertada correctamente."});
+                        res.json({"Error" : false, "Message" : "pais insertado correctamente."});
                     }
                 });
             } else {
@@ -106,9 +106,9 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
         
         validarToken(token,connection,function(resultado){
            if(resultado) {
-                var query = "UPDATE rutas SET nombre=? WHERE id =?";
+                var query = "UPDATE rutas SET nombre=? WHERE nombre =?";
                 var table = [req.body.nombre,
-                             req.body.id];
+                             req.body.nombre];
                 query = mysql.format(query,table);
                 connection.query(query,function(err,rows){
                     if(err) {
@@ -125,19 +125,19 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
         });
     });
 
-    router.delete("/pais/:id",function(req,res){
+    router.delete("/pais/:nombre",function(req,res){
         var token = req.headers['x-access-token'];
         
         validarToken(token,connection,function(resultado){
            if(resultado) {
                 var query = "DELETE from ?? WHERE ??=?";
-                var table = ["pais","id",req.params.id];
+                var table = ["pais","nombre",req.params.nombre];
                 query = mysql.format(query,table);
                 connection.query(query,function(err,rows){
                     if(err) {
                         res.json({"Error" : true, "Message" : "Error executing MySQL query"});
                     } else {
-                        res.json({"Error" : false, "Message" : "Eliminado de la BD pais: "+req.params.id});
+                        res.json({"Error" : false, "Message" : "Eliminado de la BD pais: "+req.params.nombre});
                     }
                 });
             }else {

@@ -62,7 +62,7 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
         
         validarToken(token,connection,function(resultado){
            if(resultado) {
-                var query = "SELECT * FROM guias WHERE nombre=?";
+                var query = "SELECT * FROM ciudad WHERE nombre=?";
                 var table = [req.params.nombre];
                 query = mysql.format(query,table);
                 connection.query(query,function(err,rows){
@@ -91,7 +91,7 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
                 connection.query(query,function(err,rows){
                     if(err) {
                         res.json({"Error" : true, 
-                            "Message" : "ERROR: Este guia ya existe en la BD:"+req.body.nombre,
+                            "Message" : "ERROR: Este ciudad ya existe en la BD:"+req.body.nombre,
                             "Error: ": err});
                     } else {
                         res.json({"Error" : false, "Message" : "Ciudad insertada correctamente."});
@@ -108,10 +108,10 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
         
         validarToken(token,connection,function(resultado){
            if(resultado) {
-                var query = "UPDATE rutas SET nombre=?, pais=? WHERE id =?";
+                var query = "UPDATE rutas SET nombre=?, pais=? WHERE nombre =?";
                 var table = [req.body.nombre,
                              req.body.pais,
-                             req.body.id];
+                             req.body.nombre];
                 query = mysql.format(query,table);
                 connection.query(query,function(err,rows){
                     if(err) {
@@ -119,7 +119,7 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
                             "Message" : "Error executing MySQL query",
                             "Error: ": err});
                     } else {
-                        res.json({"Error" : false, "Message" : "Guia modificado correctamente."});
+                        res.json({"Error" : false, "Message" : "Ciudad modificado correctamente."});
                     }
                 });
             }else {
@@ -128,19 +128,19 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
         });
     });
 
-    router.delete("/ciudad/:id",function(req,res){
+    router.delete("/ciudad/:nombre",function(req,res){
         var token = req.headers['x-access-token'];
         
         validarToken(token,connection,function(resultado){
            if(resultado) {
                 var query = "DELETE from ?? WHERE ??=?";
-                var table = ["ciudad","id",req.params.id];
+                var table = ["ciudad","nombre",req.params.nombre];
                 query = mysql.format(query,table);
                 connection.query(query,function(err,rows){
                     if(err) {
                         res.json({"Error" : true, "Message" : "Error executing MySQL query"});
                     } else {
-                        res.json({"Error" : false, "Message" : "Eliminado de la BD ciudad: "+req.params.id});
+                        res.json({"Error" : false, "Message" : "Eliminado de la BD ciudad: "+req.params.nombre});
                     }
                 });
             }else {

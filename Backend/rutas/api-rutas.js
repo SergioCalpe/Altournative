@@ -39,7 +39,7 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
         validarToken(token,connection,function(resultado){
            if(resultado) {
                 var query = "SELECT * FROM ??";
-                var table = ["rutas"];
+                var table = ["ruta"];
                 query = mysql.format(query,table);
                 connection.query(query,function(err,rows){
                     if(err) {
@@ -61,7 +61,7 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
         
         validarToken(token,connection,function(resultado){
            if(resultado) {
-                var query = "SELECT * FROM rutas WHERE id=?";
+                var query = "SELECT * FROM ruta WHERE id=?";
                 var table = [req.params.id];
                 query = mysql.format(query,table);
                 connection.query(query,function(err,rows){
@@ -83,12 +83,11 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
 
         validarToken(token,connection,function(resultado){
             if(resultado) {
-                var query = "INSERT INTO rutas(nombre, distancia, duracion, ciudad, guia) VALUES (?,?,?,?,?)";
+                var query = "INSERT INTO ruta(nombre, distancia, duracion, ciudad) VALUES (?,?,?,?)";
                 var table = [req.body.nombre,
                              req.body.distancia,
                              req.body.duracion,
-                             req.body.ciudad,
-                             req.body.guia];
+                             req.body.ciudad];
                 query = mysql.format(query,table);
                 connection.query(query,function(err,rows){
                     if(err) {
@@ -110,7 +109,7 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
         
         validarToken(token,connection,function(resultado){
            if(resultado) {
-                var query = "UPDATE rutas SET nombre=?, distancia=?, duracion=?, ciudad=? WHERE id = ?";
+                var query = "UPDATE ruta SET nombre=?, distancia=?, duracion=?, ciudad=? WHERE id =?";
                 var table = [req.body.nombre,
                              req.body.distancia,
                              req.body.duracion,
@@ -138,7 +137,7 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
         validarToken(token,connection,function(resultado){
            if(resultado) {
                 var query = "DELETE from ?? WHERE ??=?";
-                var table = ["rutas","id",req.params.id];
+                var table = ["ruta","id",req.params.id];
                 query = mysql.format(query,table);
                 connection.query(query,function(err,rows){
                     if(err) {
