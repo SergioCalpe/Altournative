@@ -61,6 +61,7 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
                 res.json({"Error" : true, "Message" : "Error executing MySQL query",
                     "Error: ": err});
             } else {
+                console.log(row)
                 res.json({"Error" : true, "Message" : "Success", "token":crearToken(req.body.login, row.insertId)});                
             }
         });
