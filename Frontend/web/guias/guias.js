@@ -9,7 +9,7 @@ angular.module('altournative.guias', [
 		controller: 'guiasCtrl',
 		templateUrl: 'guias/guias.html',
 		data: {
-			requiresLogin:  true 
+			requiresLogin:  true
 		}
 	});
 })
@@ -30,16 +30,16 @@ angular.module('altournative.guias', [
  		}
 	}).then(function successCallback(response) {
 		$scope.data = response.data || "Request failed";
-		
+
 		angular
-		.forEach($scope.data, 
+		.forEach($scope.data,
 				function(value, key) {
 					this.push({'expanded':false, 'items': value});
 				},
 				guias);
-		console.log(guias[2].items);
 		$scope.data = guias;
 		$scope.array = guias[2].items; //el vector de guias
+		console.log($scope.array);
 
   	}, function errorCallback(response) {
   		//Error server response
@@ -47,7 +47,7 @@ angular.module('altournative.guias', [
 
   	$scope.orderList = "id";
 	var guias = [];
-	
+
 	$scope.toggleCategory = function(guia) {
 		guia.expanded = !guia.expanded;
 	};
@@ -68,8 +68,8 @@ angular.module('altournative.guias', [
 	// 	console.log(id_usuario+'/'+$scope.usuario.items.id+'-'+$scope.usuario.items.login);
 	// }
 	$scope.guardar = function() {
-		
 
+		console.log($scope.guia)
 		$http({
   		method: 'PUT',
   		url: 'http://localhost:3000/altournative/guias/',
@@ -77,13 +77,12 @@ angular.module('altournative.guias', [
    				'x-access-token': store.get('jwt')
  		},
  		data: $scope.guia
-
 		}).then(function successCallback(response) {
 
   		}, function errorCallback(response) {
- 
+
   		});
-  		
+
 	}
 }).controller('guiaDelCtrl', function GuiaEdicionController($scope, store, $http, jwtHelper, $state) {
 	// $scope.id_usuario = jwtHelper.decodeToken(store.get('jwt')).id;
@@ -93,7 +92,7 @@ angular.module('altournative.guias', [
 	// 	console.log(id_usuario+'/'+$scope.usuario.items.id+'-'+$scope.usuario.items.login);
 	// }
 	$scope.borrar = function() {
-		
+
 
 		$http({
   		method: 'DELETE',
@@ -106,8 +105,8 @@ angular.module('altournative.guias', [
 		}).then(function successCallback(response) {
 				$state.reload();
   		}, function errorCallback(response) {
- 
+
   		});
-  		
+
 	}
 });
