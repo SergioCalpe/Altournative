@@ -37,7 +37,6 @@ angular.module('altournative.usuarios', [
 					this.push({'expanded':false, 'items': value});
 				},
 				usuarios);
-		console.log(usuarios);
 		$scope.data = usuarios;
 		$scope.array = usuarios[2].items; //el vector de usuarios
 
