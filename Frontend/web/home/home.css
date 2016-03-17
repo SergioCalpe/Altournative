@@ -4,7 +4,11 @@
 }
 
 .img {
-    padding-top: 5%;
+ 
+	background-image: url("home.jpg");
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-attachment: fixed;
 }
 
 .button {

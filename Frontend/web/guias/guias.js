@@ -30,7 +30,7 @@ angular.module('altournative.guias', [
  		}
 	}).then(function successCallback(response) {
 		$scope.data = response.data || "Request failed";
-
+		console.log($scope.data);
 		angular
 		.forEach($scope.data,
 				function(value, key) {
@@ -61,7 +61,7 @@ angular.module('altournative.guias', [
   	});
 
 })
-.controller('guiaCrearCtrl', function guiasController($scope, $http, store, jwtHelper, $location) {
+.controller('guiaCrearCtrl', function guiasController($scope, $http, store, jwtHelper, $location, $state) {
 	$scope.anyadirGuia = function(){
 		console.log('Pulsado botón para crear guía');
 		console.log($scope.crearGuia);
@@ -73,7 +73,7 @@ angular.module('altournative.guias', [
    		},
 			data: $scope.crearGuia
 		}).then(function (res) {
-			alert(res);
+			$state.reload();
 		}, function(error) {
 			alert(error.data);
 		});
