@@ -1,18 +1,32 @@
 <div class="signup center-block jumbotron">
-  <form role="form">
+  <form role="form" data-toggle="validator">
   <h1>Signup</h1>
+
+   <div class="form-group">
+    <input type="text" class="form-control" id="login" ng-model="user.login" placeholder="Username" required>
+  </div>
   <div class="form-group">
-    <input type="text" class="form-control" id="login" ng-model="user.nombre" placeholder="Nombre">
+    <input type="email" class="form-control" id="email" ng-model="user.email" placeholder="Email" required>
+  </div>
+  <div class="form-group">
+    <input type="password" class="form-control" id="password" ng-model="user.password" placeholder="Password" required>
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="form-control" id="nombre" ng-model="user.nombre" placeholder="Nombre">
   </div>
   <div class="form-group">
     <input type="text" class="form-control" id="apellidos" ng-model="user.apellidos" placeholder="Apellidos">
   </div>
-  <div class="form-group">
-    <input type="text" class="form-control" id="email" ng-model="user.login" placeholder="Username">
+  <div class="form-inline">
+    <div class="form-group">
+      <input type="text" class="form-control" id="dni" ng-model="user.dni" placeholder="DNI">
+    </div>
+    <div class="form-group">
+      <input type="tel" class="form-control" id="telefono" ng-model="user.telefono" placeholder="Telefono">
+    </div>
   </div>
-  <div class="form-group">
-    <input type="password" class="form-control" id="password" ng-model="user.password" placeholder="Password">
-  </div>
+  <br/>
   <button type="submit" class="btn btn-primary" ng-click="signup()">Submit</button>
   <a ui-sref="home()">Click here to Home</a>
 </form>
