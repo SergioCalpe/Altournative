@@ -18,11 +18,12 @@ angular.module('altournative.signup', [
 			data: $scope.user
 		}).then(function (res) {
 			store.set('jwt', res.data.token);
-			$state.go('home');
+			$location.path('/');
 			if(store.get('jwt')) {
 				$scope.userLoged.msg = 'Bienvenido'
 				$scope.userLoged.login = $scope.user.login;
 				$('#userLoged').show();
+				$state.reload();
 			} else {
 				$('#userLoged').hide();
 			}
