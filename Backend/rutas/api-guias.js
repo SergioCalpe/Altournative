@@ -98,7 +98,7 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
                             "Message" : "ERROR: Este guia ya existe en la BD:"+req.body.id,
                             "Error: ": err});
                     } else {
-                        onsole.log("bieeeee\n\n\n")
+                        
                         res.json({"Error" : false, "Message" : "Guia insertado correctamente."});
                     }
                 });
