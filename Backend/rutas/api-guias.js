@@ -79,7 +79,7 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
 
     router.post("/guias",function(req,res){
         var token = req.headers['x-access-token'];
-
+        console.log(req.body)
         validarToken(token,connection,function(resultado){
             if(resultado) {
                 var query = "INSERT INTO guia(nombre, apellidos, dni, email, telefono, fecha_nac, ciudad) VALUES (?,?,?,?,?,?,?)";
@@ -93,10 +93,12 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
                 query = mysql.format(query,table);
                 connection.query(query,function(err,rows){
                     if(err) {
+                        console.log("Erorrrrrrrrr\n\n\n")
                         res.json({"Error" : true, 
                             "Message" : "ERROR: Este guia ya existe en la BD:"+req.body.id,
                             "Error: ": err});
                     } else {
+                        
                         res.json({"Error" : false, "Message" : "Guia insertado correctamente."});
                     }
                 });
