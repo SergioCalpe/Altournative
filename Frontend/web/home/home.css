@@ -1,16 +1,26 @@
-.contenedor {
-    text-align: center;
-    padding-bottom: 10%;
+@font-face{
+	font-family: fuente_1;
+	font-style: normal;
+	font-weight: normal;
+	src:url("../RedbudFont/Redbud-Shadow.ttf");
+}
+@font-face{
+	font-family: fuente_2;
+	font-style: normal;
+	font-weight: normal;
+	src:url("../RedbudFont/Redbud-Spurs.ttf");
 }
 
-.img {
- 
-	background-image: url("home.jpg");
-    background-repeat: no-repeat;
-    background-position: right top;
-    background-attachment: fixed;
+p.tipografia_1 {
+	font-family: fuente_1;
+	font-size: 65px;
+	color: #2c3e50;
+	margin-left: 4%;
 }
-
-.button {
-    width: 24%;
+p.tipografia_2 {
+	margin-left: 12%;
+	font-family: fuente_2;
+	font-size: 20px;
+	font-style: italic;
+	color: #2c3e50;
 }

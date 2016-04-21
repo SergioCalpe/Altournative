@@ -1,5 +1,4 @@
-<div class="container">
-<div ng-controller="guiasCtrler" >
+<div ng-controller="guiasCtrl" class="signup center-block jumbotron">
 	<legend><h2>Lista de guias</h2></legend>
 	<form role="form" class="form-inline">
 		<div class="searchBar form-group has-feedback has-feedback-left">
@@ -81,5 +80,39 @@
 		    </tbody>
 	    </table>
 	    <!--  Repeat end, closing category group -->
+	    
+		
+			
+<div ng-controller="guiaCrearCtrl">
+<br><br><br>
+				<h4>Añadir guia</h4>
+				<div class="form-group">
+			        <input type="text" class="form-control"ng-model="crearGuia.nombre" placeholder="Nombre">
+			    </div>
+			    <div class="form-group">
+			        <input type="text" class="form-control"ng-model="crearGuia.apellidos" placeholder="Apellidos">
+			    </div>
+			  <form novalidate class="simple-form">
+			  	<div class="form-group">
+			        <input type="text" class="form-control"ng-model="crearGuia.email" placeholder="Email">
+			    </div>
+			    <div class="form-group">
+			        <input type="text" class="form-control"ng-model="crearGuia.dni" placeholder="Dni">
+			    </div>
+
+			    <div class="form-group">
+			        <input type="text" class="form-control"ng-model="crearGuia.telefono" placeholder="Telefono">
+			    </div>
+
+			    <div class="form-group">
+			        <input type="text" class="form-control"ng-model="crearGuia.ciudad" placeholder="Ciudad">
+			    </div>
+			    <div class="form-group">
+			        <input type="date" class="form-control"ng-model="crearGuia.fecha_nac" placeholder="Fecha nacimiento (YYYY-MM-DD)">
+			    </div>
+
+			    <button type="submit" class="btn btn-primary" ng-click="anyadirGuia()">Añadir</button>
+					<br>
+			</div>
 </div>
 </div>

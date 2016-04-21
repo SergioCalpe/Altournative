@@ -4,6 +4,7 @@ angular.module('altournative', [
 	'altournative.login',
 	'altournative.usuarios',
 	'altournative.guias',
+	'altournative.guiasAdmin',
 	'angular-jwt',
 	'angular-storage',
 	'ui.bootstrap',
@@ -58,9 +59,11 @@ angular.module('altournative', [
 	$scope.usuarios = function(){
 		$location.path('/usuarios');
 	}
-
 	$scope.guias = function(){
 		$location.path('/guias');
+	}
+	$scope.guiasAdmin = function(){
+		$location.path('/guiasAdmin');
 	}
 	
 });

@@ -1,19 +1,19 @@
-angular.module('altournative.guias', [
+angular.module('altournative.guiasAdmin', [
 	'ui.router',
 	'angular-storage',
 	'angular-jwt'
 ])
 .config(function($stateProvider) {
-	$stateProvider.state('guias', {
-		url: '/guias',
-		controller: 'guiasCtrler',
-		templateUrl: 'guias/guias.html',
+	$stateProvider.state('guiasAdmin', {
+		url: '/guiasAdmin',
+		controller: 'guiasCtrl',
+		templateUrl: 'guiasAdmin/guiasAdmin.html',
 		data: {
 			requiresLogin:  true
 		}
 	});
 })
-.controller('guiasCtrler', function guiasController($scope, $http, store, jwtHelper, $location) {
+.controller('guiasCtrl', function guiasController($scope, $http, store, jwtHelper, $location) {
 	$scope.signup = function() {
 		$location.path('/signup');
 	}
