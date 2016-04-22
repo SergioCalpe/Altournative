@@ -1,0 +1,73 @@
+<div ng-controller="rutasCtrl" class="signup center-block jumbotron">
+	<legend><h2>Lista de rutas</h2></legend>
+	<form role="form" class="form-inline">
+		<div class="searchBar form-group has-feedback has-feedback-left">
+		    <label class="control-label sr-only">Username</label>
+			    <div class="inline-feedback">
+				    <input id="search" type="text" class="form-control input-lg" ng-model="search" placeholder="Search" />
+				    <i class="form-control-feedback glyphicon glyphicon-search"></i>
+			    </div>
+          <select ng-model="list">
+            <option value="">Ciudad</option>
+            <option value="guia">Guia</option>
+          </select>
+
+	  	</div>
+  	</form>
+  	<br><br><br>
+    
+    <table st-table="array" class="table table-striped">
+	    <thead>
+	      <tr>
+	        <th>Id</th>
+	        <th>Nombre</th>
+	        <th>Distancia</th>
+	        <th>Duracion</th>
+			<th>Ciudad</th>
+	      </tr>
+	  	</thead>
+	  	<tbody>
+	    	<tr ng-repeat="guia in array | filter:miFiltro | orderBy:list">
+		          <td>{{guia.id}}</td>
+		          <td>{{guia.nombre}}</td>
+		          <td>{{guia.distancia}}</td>
+		          <td>{{guia.duracion}}</td>
+				  <td>{{guia.ciudad}}</td>
+				  <td>
+		            <a onmounseover="" style="cursor: pointer;"
+		            <span class = "glyphicon glyphicon-trash"ng-controller="guiaDelCtrl" ng-model="id_guia" class="myButton"  ng-click="borrar()"/></span></a>       
+					<a onmounseover="" style="cursor: pointer;"
+					<span ng-click="toggleCategory(guia)" ng-model="id_guia">
+					<span class="expand-indicator" ng-show="guia.expanded" ng-init="editar ? editar=false :  editar=true"><i class="fa fa-pencil"></i></span>
+				    <span class="expand-indicator" ng-show="!guia.expanded"><i class="fa fa-pencil"></i></span></a>
+				    <div class="content list-items animate-show-item" ng-show="guia.expanded">
+	        		<div class="left">
+						<div ng-controller="guiaEditCtrl" id="div_add" class="div_add list-items animate-show-item" ng-show="editar">
+				            <form role="form" >
+				                <legend><h4>Editar guia</h4></legend>
+				                <div class="form-group">
+				                  <input type="text" class="form-control" ng-model="guia.id" disabled="disabled">
+				                </div>
+				                <div class="form-group">
+				                  <input type="text" class="form-control" ng-model="guia.nombre" placeholder="Nombre">
+				                </div>
+				                <div class="form-group">
+				                  <input type="text" class="form-control"ng-model="guia.distancia" placeholder="distancia">
+				                </div>
+				                <div class="form-group">
+				                  <input type="text" class="form-control"ng-model="guia.duracion" placeholder="duracion">
+				                </div>
+												                <button type="submit"  class="btn btn-primary" ng-click="editar=false; guardar()">Guardar</button>
+								<br>
+				              </form>
+	          			</div>
+		      		</div>
+				</div>
+		          </td>
+
+			</tr>
+					
+		    </tbody>
+	    </table>
+</div>
+</div>
