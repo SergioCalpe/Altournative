@@ -77,6 +77,47 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
             }   
         });
     });
+    //para obtener el gúia
+    router.get("/rutas/:id/guia", function(req, res) {
+        var token = req.headers['x-access-token'];
+        
+        validarToken(token,connection,function(resultado){
+           if(resultado) {
+                var query = "SELECT ruta.ciudad FROM ruta WHERE id=?";
+                var table = [req.params.id];
+                query = mysql.format(query,table);
+                connection.query(query,function(err,rows){
+                    if(err) {
+                        res.json({"Error" : true, "Message" : "Error executing MySQL query",
+                            "Error: ": err});
+                    } else {
+                        console.log("holaaaa"+rows[0].ciudad);
+                        var city = rows[0].ciudad;
+                        validarToken(token,connection,function(resultado){
+                           if(resultado) {
+                                var query = "SELECT * FROM guia WHERE guia.ciudad = '"+city+"'";
+                                var table = [req.params.id];
+                                query = mysql.format(query,table);
+                                connection.query(query,function(err,rows){
+                                    if(err) {
+                                        res.json({"Error" : true, "Message" : "Error executing MySQL query",
+                                            "Error: ": err});
+                                    } else {
+                                        console.log("holaaaa"+rows[0].ciudad);
+                                        res.json({"Error" : false, "Message" : "Success", "Guia" : rows});
+                                    }
+                                });
+                            } else {
+                                res.json({"Error" : true, "Message" : "ERROR: Token invalido"});
+                            }   
+                        });
+                    }
+                });
+            } else {
+                res.json({"Error" : true, "Message" : "ERROR: Token invalido"});
+            }   
+        });
+    });
 
     router.post("/rutas",function(req,res){
         var token = req.headers['x-access-token'];
