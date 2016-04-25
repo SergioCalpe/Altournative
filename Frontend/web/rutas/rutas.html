@@ -24,27 +24,46 @@
 	        <th>Distancia</th>
 	        <th>Duracion</th>
 					<th>Ciudad</th>
+					<th>Datos del guía</th>
 	      </tr>
 	  	</thead>
 	  	<tbody>
 	    	<tr ng-repeat="ruta in array | filter:miFiltro | orderBy:list">
-		          <td>{{ruta.id}}</td>
-		          <td>{{ruta.nombre}}</td>
-		          <td>{{ruta.distancia}}</td>
-		          <td>{{ruta.duracion}}</td>
-				  <td>{{ruta.ciudad}}</td>
+          <td><div ng-bind-html="ruta.mapa"></div></td>
+          <td>{{ruta.nombre}}</td>
+          <td>{{ruta.distancia}}km</td>
+          <td>{{ruta.duracion}}h</td>
+		  		<td>{{ruta.ciudad}}</td>
 				  <td>
 				  	
 					<a onmounseover="" style="cursor: pointer;"
 					<span ng-click="toggleCategory(ruta)" ng-model="id_ruta">
-					<span class="expand-indicator" ng-show="ruta.expanded" ng-init="editar ? editar=false :  editar=true"><i class="fa fa-pencil"></i></span>
-				    <span class="expand-indicator" ng-show="!ruta.expanded"><i class="fa fa-pencil"></i></span></a>
-				    <div class="content list-items animate-show-item" ng-show="ruta.expanded">
-	        		<div class="left">
-		      		</div>
-				</div>
-				<iframe src="https://www.google.com/maps/d/embed?mid=1UY-ya-w5KNmU1Y59n4aDLNbmqcc" width="320" height="240"></iframe>
-		          </td>
+					<span class="expand-indicator" ng-show="ruta.expanded" ng-init="guiaVer ? guiaVer=false :  guiaVer=true"><i class="fa fa-chevron-up"></i></span>
+				  <span class="expand-indicator" ng-show="!ruta.expanded"><i class="fa fa-chevron-down"></i></span></a>
+				  <div class="content list-items animate-show-item" ng-show="ruta.expanded">
+	        <div class="left"></div></div>
+	        <div ng-controller="rutaQueGuiaCtrl" id="div_verGuia" class="div_verGuia list-items animate-show-item" ng-show="guiaVer">
+	          <form role="form" >            
+	              <div class="form-group">
+	                <input type="text" class="form-control" ng-model="arrayGuia.id" disabled="disabled">
+	              </div>
+	              <div class="form-group">
+	                <input type="text" class="form-control" ng-model="arrayGuia.nombre" disabled="disabled">
+	              </div>
+	              <div class="form-group">
+	                <input type="text" class="form-control"ng-model="arrayGuia.apellidos" disabled="disabled">
+	              </div>
+	              <div class="form-group">
+	                <input type="text" class="form-control"ng-model="arrayGuia.email" disabled="disabled">
+	              </div>
+								<div class="form-group">
+	              <input type="text" class="form-control"ng-model="arrayGuia.telefono" disabled="disabled">
+	              </div>
+								<br>
+	            </form>
+	          </div>
+		      </div>
+		      </td>
 					</tr>
 					
 		    </tbody>

@@ -13,7 +13,7 @@ angular.module('altournative.rutas', [
 		}
 	});
 })
-.controller('rutasCtrl', function rutasController($scope, $http, store, jwtHelper, $location) {
+.controller('rutasCtrl', function rutasController($scope, $http, store, jwtHelper, $location,$document) {
 	$scope.signup = function() {
 		$location.path('/signup');
 	}
@@ -30,7 +30,7 @@ angular.module('altournative.rutas', [
  		}
 	}).then(function successCallback(response) {
 		$scope.data = response.data || "Request failed";
-		console.log($scope.data);
+		//console.log($scope.data);
 		angular
 		.forEach($scope.data,
 				function(value, key) {
@@ -39,7 +39,8 @@ angular.module('altournative.rutas', [
 				rutas);
 		$scope.data = rutas;
 		$scope.array = rutas[2].items; //el vector de rutas
-		console.log($scope.array);
+		//$angular.element(document.querySelector('ru8taMapa').innerHTML+= $scope.array[0].mapa;
+		//console.log($scope.array);
 
   	}, function errorCallback(response) {
   		//Error server response
@@ -155,4 +156,48 @@ angular.module('altournative.rutas', [
   		});
 
 	}
+}).controller('rutaQueGuiaCtrl', function rutasQueGuiaController($scope, $http, store, jwtHelper, $location) {
+	$scope.signup = function() {
+		$location.path('/signup');
+	}
+
+	$scope.login = function() {
+		$location.path('/login');
+	}
+	$http({
+  		method: 'GET',
+  		url: 'http://localhost:3000/altournative/rutas/guia/'+ $scope.ruta.id,
+  		 headers: {
+   			'x-access-token': store.get('jwt')
+ 		}
+	}).then(function successCallback(response) {
+		$scope.data = response.data || "Request failed";
+		angular
+		.forEach($scope.data,
+				function(value, key) {
+					this.push({'expanded':false, 'items': value});
+				},
+				rutas);
+		//console.log($scope.data[2]);
+		$scope.data = rutas;
+		$scope.arrayGuia = rutas[2].items[0]; //el vector con datos del guía
+  	}, function errorCallback(response) {
+  		console.log("Error en server");
+  	});
+
+  	$scope.orderList = "id";
+	var rutas = [];
+
+	$scope.toggleCategory = function(guia) {
+		guia.expanded = !guia.expanded;
+	};
+
+	Object.defineProperty($scope, "miFiltro", {
+      get: function() {
+          var out = {};
+          out[$scope.list || "$"] = $scope.search;
+          return out;
+      }
+  	});
+
 });

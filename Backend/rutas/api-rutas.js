@@ -77,10 +77,10 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
             }   
         });
     });
-    //para obtener el gúia
-    router.get("/rutas/:id/guia", function(req, res) {
+    //para obtener el guía
+    router.get("/rutas/guia/:id", function(req, res) {
         var token = req.headers['x-access-token'];
-        
+        console.log("holaaaaaaaaa")
         validarToken(token,connection,function(resultado){
            if(resultado) {
                 var query = "SELECT ruta.ciudad FROM ruta WHERE id=?";
