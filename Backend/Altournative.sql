@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.5.2
 -- http://www.phpmyadmin.net
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 16-03-2016 a las 19:14:37
+-- Servidor: localhost
+-- Tiempo de generación: 25-04-2016 a las 12:21:47
 -- Versión del servidor: 10.1.10-MariaDB
--- Versión de PHP: 7.0.4
+-- Versión de PHP: 5.6.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -67,10 +67,12 @@ CREATE TABLE `guia` (
 --
 
 INSERT INTO `guia` (`id`, `nombre`, `apellidos`, `dni`, `email`, `telefono`, `fecha_nac`, `ciudad`) VALUES
-(5, 'Danilo', 'Reis', 'danilo@ua.es', '6123456', '1999-03-06', '0000-00-00', 'Alcoy'),
-(6, 'Fernando', 'Llopis', 'fer@ua.es', '6123456', '1999-03-06', '0000-00-00', 'Alcoy'),
-(7, 'Pablo', 'Serrano', '74000000x', 'pablo@email.com', '698756321', '1995-05-09', 'Alcoy'),
-(9, 'manuel', 'perez', '74000000x', 'manuel@email.com', '698756321', '1995-05-19', 'Madrid');
+(5, 'Danilo', 'Reis', '6123456F', 'danilo@ua.es', '612349245', '1999-03-04', 'Alicante'),
+(6, 'Fernando', 'Llopis', '6123456A', 'fer@ua.es', '698258121', '2015-11-09', 'Alcoy'),
+(7, 'Pablo', 'Serrano', '74000000x', 'pablo@email.com', '698756321', '1995-05-09', 'Valencia'),
+(23, 'Héctor', 'Sansano Miralles', '743720222D', 'sansanomiralles@gmail.com', '610608242', '1992-06-05', 'Elche'),
+(24, 'pepe', 'asdfa', 'gafga', 'fafdaf', 'gag', '1992-05-05', 'fasdfga'),
+(25, 'Hector', 'sansan', '8342438', 'sanans', '5123541', '2016-03-14', 'Elche');
 
 -- --------------------------------------------------------
 
@@ -108,17 +110,18 @@ CREATE TABLE `ruta` (
   `nombre` varchar(200) COLLATE utf8_bin NOT NULL,
   `distancia` int(11) NOT NULL,
   `duracion` int(11) NOT NULL,
-  `ciudad` varchar(100) COLLATE utf8_bin NOT NULL
+  `ciudad` varchar(100) COLLATE utf8_bin NOT NULL,
+  `mapa` varchar(500) COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `ruta`
 --
 
-INSERT INTO `ruta` (`id`, `nombre`, `distancia`, `duracion`, `ciudad`) VALUES
-(1, 'Disfruta del futbol', 15, 6, 'Valencia'),
-(2, 'casco antiguo', 6, 3, 'Valencia'),
-(3, 'el barrio', 5, 3, 'Alicante');
+INSERT INTO `ruta` (`id`, `nombre`, `distancia`, `duracion`, `ciudad`, `mapa`) VALUES
+(1, 'Disfruta del futbol', 15, 6, 'Alicante', '<iframe src="https://www.google.com/maps/d/embed?mid=1UY-ya-w5KNmU1Y59n4aDLNbmqcc" width="640" height="480"></iframe>'),
+(2, 'Casco antiguo', 6, 3, 'Alicante', NULL),
+(3, 'El barrio', 5, 3, 'Alcoy', NULL);
 
 -- --------------------------------------------------------
 
@@ -142,14 +145,10 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `apellidos`, `dni`, `email`, `telefono`, `login`, `password`) VALUES
-(6, 'pepe2', 'jimenez femenia', 'XXXXXXXXX', 'pepe@email.com', '666666666', 'pepepe', '81dc9bdb52d04dc20036dbd8313ed055'),
-(9, 'sergio', 'jimenez femenia', 'XXXXXXXXX', 'pablo@email.com', '666666666', 'pablo', '81dc9bdb52d04dc20036dbd8313ed055'),
-(11, 'sergio', 'jimenez femenia', 'XXXXXXXXX', 'perico@email.com', '666666666', 'perico', '81dc9bdb52d04dc20036dbd8313ed055'),
-(12, 'sergio', 'jimenez femenia', 'XXXXXXXXX', 'hola@email.com', '666666666', 'hola', '81dc9bdb52d04dc20036dbd8313ed055'),
-(13, 'sergio', 'jimenez femenia', 'XXXXXXXXX', 'manuel@email.com', '666666666', 'manuel', '81dc9bdb52d04dc20036dbd8313ed055'),
-(17, 'No borrar', 'pues eso.', NULL, NULL, NULL, 'sergio', '81dc9bdb52d04dc20036dbd8313ed055'),
-(18, 'kiko', 'perez', NULL, NULL, NULL, 'kik', '81dc9bdb52d04dc20036dbd8313ed055'),
-(19, 'maria', 'mora', '000000000', 'maria@hotmail.com', '699999888', 'mary', '81dc9bdb52d04dc20036dbd8313ed055');
+(13, 'sergio 2', 'jimenez femenia', 'XXXXXXXXX', 'manuel@email.com', '666666666', 'manuel', '81dc9bdb52d04dc20036dbd8313ed055'),
+(17, 'Sergio', 'Perez Sansano', NULL, 'serafd@gmail.com', '610543981', 'sergio', '81dc9bdb52d04dc20036dbd8313ed055'),
+(19, 'Maria', 'Mora Perez', '000000000', 'maria@hotmail.com', '699999888', 'mary', '81dc9bdb52d04dc20036dbd8313ed055'),
+(32, 'Juan ', 'Perez Sanchez', '74373245A', 'juan.sancez@email.com', '614543823', 'juan', '1234');
 
 -- --------------------------------------------------------
 
@@ -218,7 +217,7 @@ ALTER TABLE `valoracion`
 -- AUTO_INCREMENT de la tabla `guia`
 --
 ALTER TABLE `guia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT de la tabla `ruta`
 --
@@ -228,7 +227,7 @@ ALTER TABLE `ruta`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT de la tabla `valoracion`
 --
