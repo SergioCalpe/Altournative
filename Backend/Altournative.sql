@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 25-04-2016 a las 12:21:47
--- Versión del servidor: 10.1.10-MariaDB
--- Versión de PHP: 5.6.19
+-- Tiempo de generación: 25-04-2016 a las 19:46:06
+-- Versión del servidor: 10.1.9-MariaDB
+-- Versión de PHP: 5.5.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `altournative`
+-- Base de datos: `Altournative`
 --
 
 -- --------------------------------------------------------
@@ -59,20 +59,21 @@ CREATE TABLE `guia` (
   `email` varchar(100) COLLATE utf8_bin NOT NULL,
   `telefono` varchar(20) COLLATE utf8_bin NOT NULL,
   `fecha_nac` date NOT NULL,
-  `ciudad` varchar(100) COLLATE utf8_bin DEFAULT NULL
+  `ciudad` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `foto` varchar(500) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `guia`
 --
 
-INSERT INTO `guia` (`id`, `nombre`, `apellidos`, `dni`, `email`, `telefono`, `fecha_nac`, `ciudad`) VALUES
-(5, 'Danilo', 'Reis', '6123456F', 'danilo@ua.es', '612349245', '1999-03-04', 'Alicante'),
-(6, 'Fernando', 'Llopis', '6123456A', 'fer@ua.es', '698258121', '2015-11-09', 'Alcoy'),
-(7, 'Pablo', 'Serrano', '74000000x', 'pablo@email.com', '698756321', '1995-05-09', 'Valencia'),
-(23, 'Héctor', 'Sansano Miralles', '743720222D', 'sansanomiralles@gmail.com', '610608242', '1992-06-05', 'Elche'),
-(24, 'pepe', 'asdfa', 'gafga', 'fafdaf', 'gag', '1992-05-05', 'fasdfga'),
-(25, 'Hector', 'sansan', '8342438', 'sanans', '5123541', '2016-03-14', 'Elche');
+INSERT INTO `guia` (`id`, `nombre`, `apellidos`, `dni`, `email`, `telefono`, `fecha_nac`, `ciudad`, `foto`) VALUES
+(5, 'Paca', 'Suarez Ronaldo', '6123456F', 'paquita@ua.es', '612349245', '1999-03-04', 'Alicante', 'https://www.genesis-mining.com/img/Version3/gm-aboutus-jana-eichhorn@2x.jpg'),
+(6, 'Fernando', 'Llopis', '6123456A', 'fer@ua.es', '698258121', '2015-11-09', 'Alcoy', 'https://www.genesis-mining.com/img/Version3/gm-aboutus-marco-streng@2x.jpg'),
+(7, 'Pablo', 'Serrano', '74000000x', 'pablo@email.com', '698756321', '1995-05-09', 'Valencia', ''),
+(23, 'Héctor', 'Sansano Miralles', '743720222D', 'sansanomiralles@gmail.com', '610608242', '1992-06-05', 'Elche', ''),
+(24, 'pepe', 'asdfa', 'gafga', 'fafdaf', 'gag', '1992-05-05', 'fasdfga', ''),
+(25, 'Hector', 'sansan', '8342438', 'sanans', '5123541', '2016-03-14', 'Elche', '');
 
 -- --------------------------------------------------------
 
@@ -119,9 +120,9 @@ CREATE TABLE `ruta` (
 --
 
 INSERT INTO `ruta` (`id`, `nombre`, `distancia`, `duracion`, `ciudad`, `mapa`) VALUES
-(1, 'Disfruta del futbol', 15, 6, 'Alicante', '<iframe src="https://www.google.com/maps/d/embed?mid=1UY-ya-w5KNmU1Y59n4aDLNbmqcc" width="640" height="480"></iframe>'),
-(2, 'Casco antiguo', 6, 3, 'Alicante', NULL),
-(3, 'El barrio', 5, 3, 'Alcoy', NULL);
+(1, 'Disfruta del futbol', 15, 6, 'Alicante', '<iframe class="ruta" src="https://www.google.com/maps/d/embed?mid=1UY-ya-w5KNmU1Y59n4aDLNbmqcc"></iframe>'),
+(2, 'Casco antiguo', 6, 3, 'Alicante', '<iframe class="ruta" src="https://www.google.com/maps/d/embed?mid=1ALibiNjag5wTQNFLMS3wLTFPxgo"></iframe>'),
+(3, 'El barrio', 5, 3, 'Alcoy', '<iframe class="ruta" src="https://www.google.com/maps/d/embed?mid=1012475BfI2FwYrPS4NNu1eXtwII"></iframe>');
 
 -- --------------------------------------------------------
 
@@ -146,7 +147,7 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id`, `nombre`, `apellidos`, `dni`, `email`, `telefono`, `login`, `password`) VALUES
 (13, 'sergio 2', 'jimenez femenia', 'XXXXXXXXX', 'manuel@email.com', '666666666', 'manuel', '81dc9bdb52d04dc20036dbd8313ed055'),
-(17, 'Sergio', 'Perez Sansano', NULL, 'serafd@gmail.com', '610543981', 'sergio', '81dc9bdb52d04dc20036dbd8313ed055'),
+(17, 'Sergio', 'Perez Sansano', NULL, 'sergiojimenezfemenia90@gmail.com', '610543981', 'sergio', '81dc9bdb52d04dc20036dbd8313ed055'),
 (19, 'Maria', 'Mora Perez', '000000000', 'maria@hotmail.com', '699999888', 'mary', '81dc9bdb52d04dc20036dbd8313ed055'),
 (32, 'Juan ', 'Perez Sanchez', '74373245A', 'juan.sancez@email.com', '614543823', 'juan', '1234');
 
