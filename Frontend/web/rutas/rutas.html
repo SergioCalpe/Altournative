@@ -28,8 +28,8 @@
 	      </tr>
 	  	</thead>
 	  	<tbody>
-	    	<tr ng-repeat="ruta in array | filter:miFiltro | orderBy:list">
-          <td><div ng-bind-html="ruta.mapa"></div></td>
+	    <tr ng-repeat="ruta in array | filter:miFiltro | orderBy:list">
+          <td ng-bind-html='renderHtml(ruta.mapa)'></td>
           <td>{{ruta.nombre}}</td>
           <td>{{ruta.distancia}}km</td>
           <td>{{ruta.duracion}}h</td>
@@ -43,7 +43,8 @@
 				  <div class="content list-items animate-show-item" ng-show="ruta.expanded">
 	        <div class="left"></div></div>
 	        <div ng-controller="rutaQueGuiaCtrl" id="div_verGuia" class="div_verGuia list-items animate-show-item" ng-show="guiaVer">
-	          <form role="form" >            
+	          <form role="form" >
+	          	            
 	              <div class="form-group">
 	                <input type="text" class="form-control" ng-model="arrayGuia.id" disabled="disabled">
 	              </div>

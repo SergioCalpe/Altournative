@@ -4,3 +4,15 @@
     width:25px;
     height:25px;
 }
+
+.ruta{
+	width:80%;	 
+	height:80%;
+	display: block;
+}
+
+.guia {
+	border-radius: 50%
+	width:80%;	 
+	height:80%;
+}

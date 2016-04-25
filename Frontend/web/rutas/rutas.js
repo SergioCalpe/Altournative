@@ -13,7 +13,7 @@ angular.module('altournative.rutas', [
 		}
 	});
 })
-.controller('rutasCtrl', function rutasController($scope, $http, store, jwtHelper, $location,$document) {
+.controller('rutasCtrl', function rutasController($scope, $http, store, jwtHelper, $location,$sce) {
 	$scope.signup = function() {
 		$location.path('/signup');
 	}
@@ -39,6 +39,10 @@ angular.module('altournative.rutas', [
 				rutas);
 		$scope.data = rutas;
 		$scope.array = rutas[2].items; //el vector de rutas
+		$scope.renderHtml = function(mapa)
+		{
+		    return $sce.trustAsHtml(mapa);
+		};
 		//$angular.element(document.querySelector('ru8taMapa').innerHTML+= $scope.array[0].mapa;
 		//console.log($scope.array);
 
