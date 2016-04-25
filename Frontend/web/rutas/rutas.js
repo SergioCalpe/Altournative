@@ -185,6 +185,11 @@ angular.module('altournative.rutas', [
 		//console.log($scope.data[2]);
 		$scope.data = rutas;
 		$scope.arrayGuia = rutas[2].items[0]; //el vector con datos del guía
+		$scope.renderHtml = function(foto)
+		{
+			console.log(foto);
+		    return $sce.trustAsHtml("<img src="+foto+" width='200' height='200' style='border-radius:50%;'>");
+		};
   	}, function errorCallback(response) {
   		console.log("Error en server");
   	});
@@ -204,4 +209,14 @@ angular.module('altournative.rutas', [
       }
   	});
 
+}).directive('backImg', function(){
+    return function(scope, element, attrs){
+        var url = attrs.backImg;
+        element.css({
+            'background-image': 'url(' + url +')',
+            'background-size' : 'cover',
+            'height' : '640px',
+            'width' : '1280px'
+        });
+    };
 });

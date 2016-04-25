@@ -4,15 +4,55 @@
     width:25px;
     height:25px;
 }
+.has-feedback .form-control {
+    padding-right: 42.5px;
+    background-color: #F4ECF7;
+}
 
 .ruta{
-	width:80%;	 
-	height:80%;
+	width:400px;	 
+	height:400px;
 	display: block;
 }
 
-.guia {
-	border-radius: 50%
-	width:80%;	 
-	height:80%;
+.foto{
+	
+	width:200px;	 
+	height:200px;
+	border-radius: 50%;
+	align-content: center;
+}
+.foto1{
+	
+	width:75px;	 
+	height:75px;
+	border-radius: 50%;
+	align-content: center;
+}
+
+.guia{	 
+	padding: 5%;
+	margin: 5%;
+	border-radius: 7%;
+	background-color: #729f98;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+    background-image: url("../imagenes/img3.jpg");
+    text-align: center;
+}
+.btn-group-lg>.btn, .btn-lg {
+    padding: 10px 16px;
+    font-size: 30px;
+    color: white;
+    line-height: 1.3333333;
+    border-radius: 30px;
+    background-image: url("../imagenes/img3.jpg");
+    text-align: center;
+}
+.btn.focus, .btn:focus, .btn:hover {
+    color: #E67E22;
+    text-decoration: none;
 }

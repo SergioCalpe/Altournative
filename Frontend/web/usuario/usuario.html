@@ -1,7 +1,17 @@
 <!-- Template de la pagina de usuarios-->
-<div class="usuario">
-    <div class="jumbotron centered">
-        <div class="contenedor">
-            <h1>Usuario</h1>
-        </div>
-    </div>
+<div class="usuario" ng-controller="usuarioCtrler">
+	<div class="container">
+	    <img class="imagen" gravatar-src="'sergiojimenezfemenia90@gmail.com'" gravatar-size="200">
+	    <form ng-model="usuario" role="form" >
+	        <br>
+	        <div class="form-group">
+	        	<div><label>{{usuario.nombre}}</label></div>
+	        	<div><label>{{usuario.apellidos}}</label></div>
+	        	<div><label>{{usuario.email}}</label></div>
+	        	<div><label>{{usuario.telefono}}</label></div>
+	        	<div><label>{{usuario.dni}}</label></div>
+	        </div>
+		</form>
+	</div>
+</div>
+

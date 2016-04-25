@@ -1,73 +1,75 @@
-<div ng-controller="rutasCtrl" class="signup center-block jumbotron">
-	<legend><h2>Lista de rutas</h2></legend>
-	<form role="form" class="form-inline">
+<div class="rutas" ng-controller="rutasCtrl">
+	<form class="form">
 		<div class="searchBar form-group has-feedback has-feedback-left">
-		    <label class="control-label sr-only">Username</label>
-			    <div class="inline-feedback">
-				    <input id="search" type="text" class="form-control input-lg" ng-model="search" placeholder="Search" />
-				    <i class="form-control-feedback glyphicon glyphicon-search"></i>
-			    </div>
-          <select ng-model="list">
-            <option value="">Ciudad</option>
-            <option value="ruta">ruta</option>
-          </select>
-
+		    <div class="inline-feedback">
+			    <input id="search" type="text" class="form-control input-lg" ng-model="search" placeholder="¿A donde quieres ir?" />
+			    <i class="form-control-feedback glyphicon glyphicon-search"></i>
+		    </div>
 	  	</div>
   	</form>
-  	<br><br><br>
-    
-    <table st-table="array" class="table table-striped">
-    	<thead>
-	      <tr>
-	        <th>Id</th>
-	        <th>Nombre</th>
-	        <th>Distancia</th>
-	        <th>Duracion</th>
-					<th>Ciudad</th>
-					<th>Datos del guía</th>
-	      </tr>
-	  	</thead>
-	  	<tbody>
-	    <tr ng-repeat="ruta in array | filter:miFiltro | orderBy:list">
-          <td ng-bind-html='renderHtml(ruta.mapa)'></td>
-          <td>{{ruta.nombre}}</td>
-          <td>{{ruta.distancia}}km</td>
-          <td>{{ruta.duracion}}h</td>
-		  		<td>{{ruta.ciudad}}</td>
-				  <td>
-				  	
-					<a onmounseover="" style="cursor: pointer;"
-					<span ng-click="toggleCategory(ruta)" ng-model="id_ruta">
-					<span class="expand-indicator" ng-show="ruta.expanded" ng-init="guiaVer ? guiaVer=false :  guiaVer=true"><i class="fa fa-chevron-up"></i></span>
-				  <span class="expand-indicator" ng-show="!ruta.expanded"><i class="fa fa-chevron-down"></i></span></a>
-				  <div class="content list-items animate-show-item" ng-show="ruta.expanded">
-	        <div class="left"></div></div>
-	        <div ng-controller="rutaQueGuiaCtrl" id="div_verGuia" class="div_verGuia list-items animate-show-item" ng-show="guiaVer">
-	          <form role="form" >
-	          	            
-	              <div class="form-group">
-	                <input type="text" class="form-control" ng-model="arrayGuia.id" disabled="disabled">
-	              </div>
-	              <div class="form-group">
-	                <input type="text" class="form-control" ng-model="arrayGuia.nombre" disabled="disabled">
-	              </div>
-	              <div class="form-group">
-	                <input type="text" class="form-control"ng-model="arrayGuia.apellidos" disabled="disabled">
-	              </div>
-	              <div class="form-group">
-	                <input type="text" class="form-control"ng-model="arrayGuia.email" disabled="disabled">
-	              </div>
-								<div class="form-group">
-	              <input type="text" class="form-control"ng-model="arrayGuia.telefono" disabled="disabled">
-	              </div>
-								<br>
-	            </form>
-	          </div>
-		      </div>
-		      </td>
-					</tr>
-					
-		    </tbody>
-	    </table>
+
+  		<div ng-repeat-start="ruta in array | filter:miFiltro | orderBy:list" class="animate-repeat-categoria container">
+			<button class="btn  btn-block btn-lg" ng-click="toggleCategory(ruta)">
+			<div class="col-md-2" ng-controller="rutaQueGuiaCtrl" id="div_verGuia">
+				<img class="foto1" ng-src='{{arrayGuia.foto}}'/>
+				{{ruta.nombre}}
+				</div></button>
+		</div>
+		<div class="content list-items animate-show-item guia row " ng-show="ruta.expanded">
+			<div class="col-md-3" ng-controller="rutaQueGuiaCtrl" id="div_verGuia">
+				<img class="foto" ng-src='{{arrayGuia.foto}}'/><br><br>
+				<label >Referencia: {{arrayGuia.id}}</label><br>
+				<label >Nombre:{{arrayGuia.nombre}}</label><br>
+				<label >Apellidos: {{arrayGuia.apellidos}}</label><br>
+				<label >Email: {{arrayGuia.email}}</label><br>
+				<label >Tlf: {{arrayGuia.telefono}}</label>
+			</div>
+
+			<div class="col-md-3">
+				<legend><h2>{{ruta.nombre}}</h2></legend> <br>
+				<label>Distancia {{ruta.distancia}}km</label><br>
+				<label>Duaración {{ruta.duracion}}h</label><br>
+				<label>Ciudad {{ruta.ciudad}}</label>
+			</div>
+
+			<div class="col-md-6">
+				<div class="ruta" ng-bind-html='renderHtml(ruta.mapa)'></div>
+			</div>
+		</div>
+
+		<div ng-repeat-end>
+			<button ng-show="ruta.expanded" class="btn btn-primary btn-block btn-sm animate-show-item" disabled="disabled">/ {{ ruta.items.login }}</button>
+			<br>
+
+		</div>
+
+
+<!--
+
+	    <div class="guia row" ng-repeat="ruta in array | filter:miFiltro | orderBy:list">
+
+	    	<div class="col-md-3" ng-controller="rutaQueGuiaCtrl" id="div_verGuia">
+				<img class="foto" ng-src='{{arrayGuia.foto}}'/><br><br>
+				<label >Referencia: {{arrayGuia.id}}</label><br>
+				<label >Nombre:{{arrayGuia.nombre}}</label><br>
+				<label >Apellidos: {{arrayGuia.apellidos}}</label><br>
+				<label >Email: {{arrayGuia.email}}</label><br>
+				<label >Tlf: {{arrayGuia.telefono}}</label>
+			</div>
+
+			<div class="col-md-3">
+				<legend><h2>{{ruta.nombre}}</h2></legend> <br>
+				<label>Distancia {{ruta.distancia}}km</label><br>
+				<label>Duaración {{ruta.duracion}}h</label><br>
+				<label>Ciudad {{ruta.ciudad}}</label>
+			</div>
+
+			<div class="col-md-6">
+				<div class="ruta" ng-bind-html='renderHtml(ruta.mapa)'></div>
+			</div>
+			
+		
+		</div>
+-->
 </div>
 </div>

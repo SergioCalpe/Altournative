@@ -1,16 +1,8 @@
 <!-- Template de la pagina de inicio -->
 <div class="home">
-	   <ng-controller="buscadorController" div back-img="../imagenes/img1.jpg">
+	   <div back-img="../imagenes/img1.jpg">
     	<br>
     	<p class="tipografia_1">ALTOURNATIVE</p>
     	<p class="tipografia_2">LA FORMA INTELIGENTE DE VIAJAR</p>
-<input ng-model="rutas" ng-change="cargarRutas()" placeholder="Buscar rutas" />
-		<ul>
-			<li ng-repeat="ruta in rutas">
-			<a ng-click="cambiaRuta(ruta.nombre)">
-				{{ruta.nombre}}
-			</a>
-			</li>
-		</ul>
-    </div> 
+    	</div> 
 </div>
