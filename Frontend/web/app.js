@@ -91,4 +91,14 @@ angular.module('altournative', [
 		$location.path('/rutas');
 	}
 	
+}).directive('backImg', function(){
+    return function(scope, element, attrs){
+        var url = attrs.backImg;
+        element.css({
+            'background-image': 'url(' + url +')',
+            'background-size' : 'cover',
+            'height' : '640px',
+            'width' : '1280px'
+        });
+    };
 });
