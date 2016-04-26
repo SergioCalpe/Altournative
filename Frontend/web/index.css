@@ -2,15 +2,23 @@
 	background-color: #2980B9;
 	color: #ECF0F1;
 }
-
+.boton {
+  padding: 0%;
+}
 .navbar-default .navbar-nav>li>a{
 	color: #ECF0F1;
 	font-size: 15px;
-	padding: 15px;
+  text-align: center;
 }
 .navbar-default .navbar-brand {
     color: #F7F1F1;
     font-size: 35px;
+    text-align: center;
+}
+.navbar-default .navbar-nav>li>a {
+    color: #ECF0F1;
+    font-size: 15px;
+    text-align: center;
 }
 
 .navbar-default .navbar-toggle .icon-bar {
@@ -36,7 +44,3 @@ body {
  	margin-left: auto;
     margin-right: auto;
 }
-
-.fondo{
-}
-

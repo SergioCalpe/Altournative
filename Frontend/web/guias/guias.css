@@ -4,3 +4,15 @@
     width:25px;
     height:25px;
 }
+
+.contenedor {
+	background-color: #45B39D;
+	border-radius: 5px;
+	margin-right: 4%;
+	margin-left: 4%;
+	margin-bottom: 2%;
+	padding: 2%;
+	text-align: center;
+}
+
+	

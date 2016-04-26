@@ -9,7 +9,7 @@ angular.module('altournative.rutas', [
 		controller: 'rutasCtrl',
 		templateUrl: 'rutas/rutas.html',
 		data: {
-			requiresLogin:  false
+			requiresLogin:  true
 		}
 	});
 })

@@ -1,17 +1,17 @@
-<div class="container">
+<div class="container guias">
 <div ng-controller="guiasCtrler" >
-	<legend><h2>Nuestros Guias</h2></legend>
+	<br>
     <div ng-repeat="arrayGuia in array | filter:miFiltro | orderBy:list">
-	  		<div class="col-md-3" ng-controller="guiasCtrler" id="div_verGuia">
+	  		<div class="contenedor col-md-3" ng-controller="guiasCtrler" id="div_verGuia">
 	  			<img class="foto" ng-src='{{arrayGuia.foto}}'/><br><br>
-					<label>Referencia: {{arrayGuia.id}}</label><br>
-					<label>Nombre:{{arrayGuia.nombre}}</label><br>
-					<label>Apellidos: {{arrayGuia.apellidos}}</label><br>
-					<label>Email: {{arrayGuia.email}}</label><br>
-					<label>Tlf: {{arrayGuia.telefono}}</label><br>				
-					<label>Ciudad: {{arrayGuia.ciudad}}</label><br>
-					<label><a ng-href="http://localhost:4000/#/rutas">Vamos!</a></label>
+				<label>Referencia: {{arrayGuia.id}}</label><br>
+				<label>{{arrayGuia.nombre}} {{arrayGuia.apellidos}}</label><br>
+				<label>{{arrayGuia.email}}</label><br>
+				<label>{{arrayGuia.telefono}}</label><br>				
+				<label>{{arrayGuia.ciudad}}</label><br>
+				<label><a ng-href="http://localhost:4000/#/rutas">Vamos!</a></label>
 	  		</div>
-	  </div>
+	 </div>
+
 </div>
 </div>

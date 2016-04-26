@@ -14,7 +14,9 @@
 	height:400px;
 	display: block;
 }
-
+.btn1 {
+    box-shadow: 7px 7px 2px #888888;
+}
 .foto{
 	
 	width:200px;	 
@@ -30,11 +32,26 @@
 	align-content: center;
 }
 
+.contenedor1 {
+    background-color: #45B39D;
+    border-radius: 5px;
+    padding-top: 2%;
+    text-align: center;
+}
+
+.contenedor2 {
+    font-size: 18px;
+}
+
 .guia{	 
 	padding: 5%;
-	margin: 5%;
+	margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 5%;
+    margin-right: 5%;
 	border-radius: 7%;
-	background-color: #729f98;
+	background-color: #ABEBC6;
+    box-shadow: 10px 10px 5px #888888;
 }
 
 .btn-block {
