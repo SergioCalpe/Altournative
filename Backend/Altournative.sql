@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 25-04-2016 a las 21:01:27
+-- Tiempo de generación: 26-04-2016 a las 11:11:03
 -- Versión del servidor: 10.1.10-MariaDB
 -- Versión de PHP: 5.6.19
 
@@ -72,8 +72,8 @@ INSERT INTO `guia` (`id`, `nombre`, `apellidos`, `dni`, `email`, `telefono`, `fe
 (6, 'Fernando', 'Llopis', '6123456A', 'fer@ua.es', '698258121', '2015-11-09', 'Alcoy', 'https://www.genesis-mining.com/img/Version3/gm-aboutus-marco-streng@2x.jpg'),
 (7, 'Pablo', 'Serrano', '74000000x', 'pablo@email.com', '698756321', '1995-05-09', 'Guardamar', 'https://www.genesis-mining.com/img/Version3/gm-aboutus-marco-streng@2x.jpg'),
 (23, 'Héctor', 'Sansano Miralles', '743720222D', 'sansanomiralles@gmail.com', '610608242', '1992-06-05', 'Elche', 'https://www.genesis-mining.com/img/Version3/gm-aboutus-marco-streng@2x.jpg'),
-(24, 'pepe', 'asdfa', 'gafga', 'fafdaf', 'gag', '1992-05-05', 'fasdfga', ''),
-(25, 'Hector', 'sansan', '8342438', 'sanans', '5123541', '2016-03-14', 'Elche', '');
+(24, 'Pepe', 'Sánchez', '87834234P', 'psan@gmail.com', '623467822', '1992-05-05', 'Zaragoza', 'https://www.genesis-mining.com/img/Version3/gm-aboutus-marco-streng@2x.jpg'),
+(25, 'Daniel', 'Rodriguez', '983451456D', 'rodriguez@gmail.com', '671234098', '2016-03-14', 'Albacete', 'https://www.genesis-mining.com/img/Version3/gm-aboutus-marco-streng@2x.jpg');
 
 -- --------------------------------------------------------
 
